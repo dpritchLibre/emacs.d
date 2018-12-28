@@ -1,0 +1,21 @@
+# a temporary location for things I think that I don't need while I try to
+# transition this directory to version control
+archive
+
+# directories
+auto-save-list
+backups
+elpa
+image-dired
+undohist
+url
+var
+
+# files
+network-security.data
+org-clock-save.el
+projectile-bookmarks.eld
+recentf
+savehist
+themes
+tramp

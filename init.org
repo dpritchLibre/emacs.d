@@ -387,6 +387,7 @@ This doesn't work at all for me?
 	  (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 
 ;; conflicts with ace-window binding
+(require 'ibuffer)
 (define-key ibuffer-mode-map (kbd "M-o") nil)
 #+END_SRC
 

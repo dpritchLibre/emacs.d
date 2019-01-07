@@ -8,6 +8,8 @@
 	TeX-insert-sub-or-superscript
 	avy-goto-char
 	backward-sexp
+	beginning-of-visual-line
+	end-of-visual-line
 	ess-roxy-move-beginning-of-line
 	ess-smart-S-assign
 	ess-smart-comma
@@ -38,7 +40,9 @@
 
 (setq mc/cmds-to-run-once
       '(
+	TeX-newline
 	ess-r-devtools-load-package
 	iedit-switch-to-mc-mode
+	markdown-enter-key
 	wdired-finish-edit
 	))

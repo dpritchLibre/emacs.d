@@ -12,6 +12,7 @@ url
 var
 
 # files
+.cache/treemacs-persist
 network-security.data
 org-clock-save.el
 projectile-bookmarks.eld

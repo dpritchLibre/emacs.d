@@ -85,11 +85,11 @@ generated code to prevent it from being overwritten every time we tangle a new
 file.  This is what is done in the following code block.
 
 #+BEGIN_SRC emacs-lisp
-;; direct Emacs to reflect future changes by updating the custom file
-(setq custom-file "~/.emacs.d/custom.el")
-;; load the existing file
-(when (file-exists-p custom-file)
-  (load custom-file))
+  ;; direct Emacs to reflect future changes by updating the custom file
+  (setq custom-file "~/.emacs.d/custom.el")
+  ;; load the existing file
+  (when (file-exists-p custom-file)
+    (load custom-file))
 #+END_SRC
 
 
@@ -98,84 +98,89 @@ file.  This is what is done in the following code block.
 ** Emacs config
 
 #+BEGIN_SRC emacs-lisp
-;; list of values that are considered safe for local variables.  See
-;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
-(add-to-list 'safe-local-variable-values '(before-save-hook))
-(add-to-list 'safe-local-variable-values '(prog-mode-hook . #'ws-butler-mode))
+  ;; list of values that are considered safe for local variables.  See
+  ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
+  (add-to-list 'safe-local-variable-values '(before-save-hook))
+  (add-to-list 'safe-local-variable-values '(prog-mode-hook . #'ws-butler-mode))
 
-;; ;; Added by Package.el.  This must come before configurations of
-;; ;; installed packages.  Don't delete this line.  If you don't want it,
-;; ;; just comment it out by adding a semicolon to the start of the line.
-;; ;; You may delete these explanatory comments.
-;; (package-initialize)
+  ;; ;; Added by Package.el.  This must come before configurations of
+  ;; ;; installed packages.  Don't delete this line.  If you don't want it,
+  ;; ;; just comment it out by adding a semicolon to the start of the line.
+  ;; ;; You may delete these explanatory comments.
+  ;; (package-initialize)
 
-;; ;; enable Emacs Lisp Package Archive
-;; (require 'package)
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;; display column number
-(setq column-number-mode t)
+  ;; ;; enable Emacs Lisp Package Archive
+  ;; (require 'package)
+  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  ;; display column number
+  (setq column-number-mode t)
 
-;; set default fill column number
-(setq-default fill-column 80)
+  ;; set default fill column number
+  (setq-default fill-column 80)
 
-;; inserting text deletes selected text
-(delete-selection-mode t)
+  ;; inserting text deletes selected text
+  (delete-selection-mode t)
 
-;; delete trailing whitespace when saving files
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+  ;; delete trailing whitespace when saving files
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; see https://github.com/lewang/ws-butler
-(use-package ws-butler
-  :ensure t)
+  ;; see https://github.com/lewang/ws-butler
+  (use-package ws-butler
+    :ensure t)
 
-;; disable graphical toolbar at the top of the screen
-(tool-bar-mode -1)
+  ;; disable graphical toolbar at the top of the screen
+  (tool-bar-mode -1)
 
-;; disable the scroll bar
-(scroll-bar-mode -1)
+  ;; disable the scroll bar
+  (scroll-bar-mode -1)
 
-;; allow more entries in the kill ring.  The default is 60.
-(setq kill-ring-max 1000)
+  ;; allow more entries in the kill ring.  The default is 60.
+  (setq kill-ring-max 1000)
 
-;; send backups to `~/.emacs.d/backups` rather than saving in the same directory
-;; as the file being backed up
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+  ;; send backups to `~/.emacs.d/backups` rather than saving in the same directory
+  ;; as the file being backed up
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
-;; save history between Emacs instances.  From
-;; http://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html
-(setq savehist-file "~/.emacs.d/savehist")
-(savehist-mode 1)
-(setq history-length t)
-(setq history-delete-duplicates t)
-(setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables
-      '(kill-ring
-        search-ring
-        regexp-search-ring))
+  ;; save history between Emacs instances.  From
+  ;; http://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html
+  (setq savehist-file "~/.emacs.d/savehist")
+  (savehist-mode 1)
+  (setq history-length t)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables
+        '(kill-ring
+          search-ring
+          regexp-search-ring))
 
-;; cc mode tab size 4 spaces
-(setq-default c-basic-offset 4)
+  ;; cc mode tab size 4 spaces
+  (setq-default c-basic-offset 4)
 
-;; so that compiler directives are properly indented
-(c-set-offset (quote cpp-macro) 0 nil)
+  ;; so that compiler directives are properly indented
+  (c-set-offset (quote cpp-macro) 0 nil)
 
-;; change comments to `//` instead of `/* ... */`
-(add-hook 'c-mode-hook (lambda () (setq comment-start "//"
-                                        comment-end   "")))
+  ;; change comments to `//` instead of `/* ... */`
+  (add-hook 'c-mode-hook (lambda () (setq comment-start "//"
+                                          comment-end   "")))
 
-;; show matching parentheses
-(show-paren-mode 1)
+  ;; show matching parentheses
+  (show-paren-mode 1)
 
-;; default to truncate lines
-(set-default 'truncate-lines t)
+  ;; default to truncate lines
+  (set-default 'truncate-lines t)
 
-;; type "y" or "n" instead of "yes" or "no"
-(fset 'yes-or-no-p 'y-or-n-p)
+  ;; type "y" or "n" instead of "yes" or "no"
+  (fset 'yes-or-no-p 'y-or-n-p)
 
-;; remove `C-;` keybinding for `flyspell-auto-correct-previous-word` since we
-;; use it for global keybinding to avy TODO
-(eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-;") nil))
+  ;; press C-SPC repeatedly after C-u C-SPC to repeatedly pop mark
+  (setq set-mark-command-repeat-pop t)
+
+  ;; remove `C-;` keybinding for `flyspell-auto-correct-previous-word` since we
+  ;; use it for global keybinding to avy TODO
+  (eval-after-load "flyspell"
+    '(progn
+       (define-key flyspell-mode-map (kbd "C-;") nil)
+       (define-key flyspell-mode-map (kbd "C-M-i") nil)))
 #+END_SRC
 
 
@@ -193,6 +198,8 @@ file.  This is what is done in the following code block.
 (global-set-key (kbd "M-]") 'scroll-up-line)
 (global-set-key (kbd "C-.") 'xref-find-definitions-other-window)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(global-set-key [remap just-one-space] 'cycle-spacing)
+
 ;; crux shortcuts.  See https://github.com/bbatsov/crux
 (global-set-key (kbd "C-c I") #'crux-find-user-init-file)
 (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)  ; places point at the correct indentation after deletion
@@ -201,6 +208,7 @@ file.  This is what is done in the following code block.
 (global-set-key (kbd "C-S-<return>") #'crux-smart-open-line-above) ; doesn't change any test on current line before starting a new line above and moving point
 (global-set-key (kbd "C-c d") #'crux-duplicate-current-line-or-region)
 (global-set-key (kbd "C-c M-d") #'crux-duplicate-and-comment-current-line-or-region)
+
 
 ;; change info mode keybindings.  By default `n` and `p` go to the next and
 ;; previous node which always causes me problems.  This changes them to scroll
@@ -238,19 +246,34 @@ file.  This is what is done in the following code block.
 
 *** Modeline
 
+Update [2019-01-07 Mon]: changed Minions + Moody to doom-modeline.
+
 #+BEGIN_SRC emacs-lisp
-;; modeline config.  See https://github.com/tarsius/minions and
-;; https://github.com/tarsius/moody
-(use-package minions
-  :config
-  (minions-mode 1))
-(use-package moody
-  :config
-  (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
-;; set the height of the mode line in pixels.  Default is 30.
-(customize-set-value 'moody-mode-line-height 14)
+;; ;; modeline config.  See https://github.com/tarsius/minions and
+;; ;; https://github.com/tarsius/moody
+;; (use-package minions
+;;   :config
+;;   (minions-mode 1))
+;; (use-package moody
+;;   :config
+;;   (setq x-underline-at-descent-line t)
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode))
+;; ;; set the height of the mode line in pixels.  Default is 30.
+;; (customize-set-value 'moody-mode-line-height 14)
+#+END_SRC
+
+Note that for all of the icons to display properly, you have to first run the
+command =M-x all-the-icons-install-fonts= (this takes a minute or so to
+perform).  See https://github.com/seagle0128/doom-modeline for details.
+
+It is also suggested to use doom-themes (I haven't done so yet).  See
+https://github.com/hlissner/emacs-doom-themes.
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :defer t
+  :hook (after-init . doom-modeline-init))
 #+END_SRC
 
 
@@ -545,7 +568,19 @@ This doesn't work at all for me?
 #+END_SRC
 
 
-** easy kill
+** expand-region
+
+Use ~C-- C-=~ to contract the region.  Magnars also claims that you can contract
+the region by pressing =-= (the minus key), but this doesn't work for me (why?).
+#+BEGIN_SRC emacs-lisp
+  ;; https://github.com/magnars/expand-region.el
+
+  (require 'expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+
+
+** easy-kill
 
 #+BEGIN_SRC emacs-lisp
 (use-package easy-kill
@@ -598,6 +633,7 @@ This doesn't work at all for me?
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-M-s") 'swiper-all)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -684,6 +720,13 @@ This doesn't work at all for me?
 
 ** Emasc Speaks Statistics (ESS)
 
+Note: use =R-initialize-on-start= when the documentation isn't working.  See
+https://github.com/emacs-ess/ESS/issues/117.
+
+Note: =M-x ess-display-package-index=, bound to =C-c C-d i= by default, gives
+package index.
+
+
 #+BEGIN_SRC emacs-lisp
 ;; load Emacs Speaks Statistics
 (require 'ess-site)
@@ -713,9 +756,6 @@ This doesn't work at all for me?
 	    (setq ess-nuke-trailing-whitespace-p t)         ; strip trailing whitespace w/o query
 	    (setq ess-sas-local-unix-keys t)                ; SAS keys, see section 13.5
 	    ))
-
-;; note: use `R-initialize-on-start` when the documentation isn't working.  See
-;; https://github.com/emacs-ess/ESS/issues/117
 
 ;; use polymode for markdown and R
 (use-package poly-markdown
@@ -892,3 +932,33 @@ This doesn't work at all for me?
 	  '(lambda ()
 	     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
+
+* Things to try (that are not yet in my configuration)
+
+** Smart occur
+
+The original command seems super useful: =M-s o= for =occur=.  Abo-abo has
+created an enhanced version at https://oremacs.com/2015/01/26/occur-dwim/.
+
+See
+https://www.reddit.com/r/orgmode/comments/5elk0z/prevent_org_from_tangling_certain_sections/
+for preventing tangling for the entire section.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (let ((sym (thing-at-point 'symbol)))
+            (when (stringp sym)
+              (regexp-quote sym))))
+        regexp-history)
+  (call-interactively 'occur))
+#+END_SRC
+
+** auto-yasnippet
+
+Create (temporary?) yasnippets on the fly.  https://github.com/abo-abo/auto-yasnippet

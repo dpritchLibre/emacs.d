@@ -103,12 +103,6 @@ file.  This is what is done in the following code block.
   (add-to-list 'safe-local-variable-values '(before-save-hook))
   (add-to-list 'safe-local-variable-values '(prog-mode-hook . #'ws-butler-mode))
 
-  ;; ;; Added by Package.el.  This must come before configurations of
-  ;; ;; installed packages.  Don't delete this line.  If you don't want it,
-  ;; ;; just comment it out by adding a semicolon to the start of the line.
-  ;; ;; You may delete these explanatory comments.
-  ;; (package-initialize)
-
   ;; ;; enable Emacs Lisp Package Archive
   ;; (require 'package)
   ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -181,6 +175,9 @@ file.  This is what is done in the following code block.
     '(progn
        (define-key flyspell-mode-map (kbd "C-;") nil)
        (define-key flyspell-mode-map (kbd "C-M-i") nil)))
+
+  ;; has the effect of adding `:ensure t` to every `use-package` call
+  (setq use-package-always-ensure t)
 #+END_SRC
 
 
@@ -249,18 +246,18 @@ file.  This is what is done in the following code block.
 Update [2019-01-07 Mon]: changed Minions + Moody to doom-modeline.
 
 #+BEGIN_SRC emacs-lisp
-;; ;; modeline config.  See https://github.com/tarsius/minions and
-;; ;; https://github.com/tarsius/moody
-;; (use-package minions
-;;   :config
-;;   (minions-mode 1))
-;; (use-package moody
-;;   :config
-;;   (setq x-underline-at-descent-line t)
-;;   (moody-replace-mode-line-buffer-identification)
-;;   (moody-replace-vc-mode))
-;; ;; set the height of the mode line in pixels.  Default is 30.
-;; (customize-set-value 'moody-mode-line-height 14)
+  ;; ;; modeline config.  See https://github.com/tarsius/minions and
+  ;; ;; https://github.com/tarsius/moody
+  ;; (use-package minions
+  ;;   :config
+  ;;   (minions-mode 1))
+  ;; (use-package moody
+  ;;   :config
+  ;;   (setq x-underline-at-descent-line t)
+  ;;   (moody-replace-mode-line-buffer-identification)
+  ;;   (moody-replace-vc-mode))
+  ;; ;; set the height of the mode line in pixels.  Default is 30.
+  ;; (customize-set-value 'moody-mode-line-height 14)
 #+END_SRC
 
 Note that for all of the icons to display properly, you have to first run the
@@ -270,10 +267,9 @@ perform).  See https://github.com/seagle0128/doom-modeline for details.
 It is also suggested to use doom-themes (I haven't done so yet).  See
 https://github.com/hlissner/emacs-doom-themes.
 #+BEGIN_SRC emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :defer t
-  :hook (after-init . doom-modeline-init))
+  (use-package doom-modeline
+    :defer t
+    :hook (after-init . doom-modeline-init))
 #+END_SRC
 
 
@@ -281,14 +277,44 @@ https://github.com/hlissner/emacs-doom-themes.
 
 * Auto-complete and textual substitution
 
-#+BEGIN_SRC emacs-lisp
-;; enable company mode in all buffers.  See http://company-mode.github.io
-(add-hook 'after-init-hook 'global-company-mode)
+** company mode
 
-;; enable yasnippet mode in all buffers.  See
-;; https://github.com/joaotavora/yasnippet
-(require 'yasnippet)
-(yas-global-mode 1)
+Enable company mode in all buffers.  See http://company-mode.github.iol
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :bind (:map company-active-map
+                ("C-n" . company-select-next)
+                ("C-p" . company-select-previous))
+    :init
+    (global-company-mode)
+    ;; :config
+    ;; ;; loops around suggestions
+    ;; (setq company-selection-wrap-around t)
+
+    ;; (if (display-graphic-p)
+    ;;     (define-key company-active-map [tab] 'company-select-next)
+    ;;   (define-key company-active-map (kbd "C-i") 'company-select-next))
+    )
+
+  ;; (add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+
+** yasnippet
+
+Enable yasnippet mode in all buffers.  See
+https://github.com/joaotavora/yasnippet.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode 1))
+
+  ;; ;; enable yasnippet mode in all buffers.  See
+  ;; ;; https://github.com/joaotavora/yasnippet
+  ;; (require 'yasnippet)
+  ;; (yas-global-mode 1)
 #+END_SRC
 
 
@@ -932,6 +958,7 @@ package index.
 	  '(lambda ()
 	     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
+
 
 * Things to try (that are not yet in my configuration)
 

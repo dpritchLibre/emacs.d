@@ -241,6 +241,17 @@ file.  This is what is done in the following code block.
 #+END_SRC
 
 
+*** rainbow-delimiters
+
+Adds highlighting to delimiters such as parenthesis to visually indicate pairs
+of matching delimiters.  See https://github.com/Fanael/rainbow-delimiters/.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+
+
 *** Modeline
 
 Update [2019-01-07 Mon]: changed Minions + Moody to doom-modeline.
@@ -262,10 +273,10 @@ Update [2019-01-07 Mon]: changed Minions + Moody to doom-modeline.
 
 Note that for all of the icons to display properly, you have to first run the
 command =M-x all-the-icons-install-fonts= (this takes a minute or so to
-perform).  See https://github.com/seagle0128/doom-modeline for details.
+perform).  See https://github.com/seagle0128/doom-modeline/ for details.
 
 It is also suggested to use doom-themes (I haven't done so yet).  See
-https://github.com/hlissner/emacs-doom-themes.
+https://github.com/hlissner/emacs-doom-themes/.
 #+BEGIN_SRC emacs-lisp
   (use-package doom-modeline
     :defer t
@@ -288,9 +299,9 @@ Enable company mode in all buffers.  See http://company-mode.github.iol
                 ("C-p" . company-select-previous))
     :init
     (global-company-mode)
-    ;; :config
-    ;; ;; loops around suggestions
-    ;; (setq company-selection-wrap-around t)
+    :config
+    ;; loops around suggestions
+    (setq company-idle-delay 0.2)
 
     ;; (if (display-graphic-p)
     ;;     (define-key company-active-map [tab] 'company-select-next)

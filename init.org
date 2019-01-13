@@ -319,6 +319,17 @@ Enable company mode in all buffers.  See http://company-mode.github.iol
 #+END_SRC
 
 
+Add =company= completion backends to AUCTeX.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-math
+    :config
+    (add-to-list 'company-backends 'company-math-symbols-latex)
+    (add-to-list 'company-backends 'company-math-symbols-unicode)
+    (add-to-list 'company-backends 'company-math-symbols-commands))
+#+END_SRC
+
+
 ** yasnippet
 
 Enable yasnippet mode in all buffers.  See

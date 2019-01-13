@@ -220,6 +220,13 @@ file.  This is what is done in the following code block.
 #+END_SRC
 
 
+Install =hydra=.  See https://github.com/abo-abo/hydra/.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra)
+#+END_SRC
+
+
 
 
 ** Appearance

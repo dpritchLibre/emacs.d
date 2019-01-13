@@ -97,6 +97,13 @@ file.  This is what is done in the following code block.
 
 ** Emacs config
 
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; has the effect of adding `:ensure t` to every `use-package` call
+  (setq use-package-always-ensure t)
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   ;; list of values that are considered safe for local variables.  See
   ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
@@ -175,9 +182,6 @@ file.  This is what is done in the following code block.
     '(progn
        (define-key flyspell-mode-map (kbd "C-;") nil)
        (define-key flyspell-mode-map (kbd "C-M-i") nil)))
-
-  ;; has the effect of adding `:ensure t` to every `use-package` call
-  (setq use-package-always-ensure t)
 #+END_SRC
 
 
@@ -229,15 +233,18 @@ file.  This is what is done in the following code block.
 
 *** Theme
 
-#+BEGIN_SRC emacs-lisp
-;; specify custom themes directory
-(setq custom-theme-directory "~/.emacs.d/themes/")
-;; (load-theme 'blippblopp t)
+TODO: how do I use =use-package= to ensure that the zenburn package is
+installed?
 
-;; specify theme.  See https://stackoverflow.com/a/26555466/5518304 for color
-;; mods.
-(load-theme 'zenburn t)
-(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+#+BEGIN_SRC emacs-lisp
+  ;; specify custom themes directory
+  (setq custom-theme-directory "~/.emacs.d/themes/")
+  ;; (load-theme 'blippblopp t)
+
+  ;; specify theme.  See https://stackoverflow.com/a/26555466/5518304 for color
+  ;; mods.
+  (load-theme 'zenburn t)
+  (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 #+END_SRC
 
 
@@ -275,8 +282,8 @@ Note that for all of the icons to display properly, you have to first run the
 command =M-x all-the-icons-install-fonts= (this takes a minute or so to
 perform).  See https://github.com/seagle0128/doom-modeline/ for details.
 
-It is also suggested to use doom-themes (I haven't done so yet).  See
-https://github.com/hlissner/emacs-doom-themes/.
+It is also suggested by the author of =doom-modeline= to use =doom-themes= (I
+haven't done so yet).  See https://github.com/hlissner/emacs-doom-themes/.
 #+BEGIN_SRC emacs-lisp
   (use-package doom-modeline
     :defer t
@@ -329,7 +336,7 @@ https://github.com/joaotavora/yasnippet.
 #+END_SRC
 
 
-This doesn't work at all for me?
+This doesn't seem to work at all for me?
 
 #+BEGIN_SRC emacs-lisp
 ;; see https://www.reddit.com/r/emacs/comments/8rxm7h/tip_how_to_better_manage_your_spelling_mistakes/
@@ -400,55 +407,57 @@ This doesn't work at all for me?
 ** Ibuffer settings
 
 #+BEGIN_SRC emacs-lisp
-;; use Ibuffer for Buffer List
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+  ;; use Ibuffer for Buffer List
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; groups Ibuffer entries.  See https://www.emacswiki.org/emacs/IbufferMode for
-;; more details.
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-	       ("R" (mode . ess-r-mode))
-	       ("Python" (mode . python-mode))
-	       ("C/C++" (or (mode . c-mode)
-			    (mode . c++-mode)))
-	       ("LaTeX" (or (mode . latex-mode)
-			    (mode . bibtex-mode)))
-	       ("shell" (mode . sh-mode))
-	       ("Lisp" (or (mode . lisp-mode)
-			   (mode . scheme-mode)))
-	       ("emacs" (or (mode . lisp-interaction-mode)
-			    (mode . emacs-lisp-mode)))
-	       ("dired" (mode . dired-mode))
-	       ("processes" (or (mode . inferior-ess-r-mode)
-				(mode . inferior-ess-mode)
-				(mode . inferior-python-mode)
-				(mode . term-mode)
-				(mode . shell-mode)
-				(mode . slime-repl-mode)
-				(mode . geiser-repl-mode)))
-	       ("Org" (mode . org-mode))))))
+  ;; groups Ibuffer entries.  See https://www.emacswiki.org/emacs/IbufferMode for
+  ;; more details.
+  (setq ibuffer-saved-filter-groups
+        (quote (("default"
+                 ("R" (mode . ess-r-mode))
+                 ("Python" (mode . python-mode))
+                 ("C/C++" (or (mode . c-mode)
+                              (mode . c++-mode)))
+                 ("LaTeX" (or (mode . latex-mode)
+                              (mode . bibtex-mode)))
+                 ("shell" (mode . sh-mode))
+                 ("Lisp" (or (mode . lisp-mode)
+                             (mode . scheme-mode)))
+                 ("emacs" (or (mode . lisp-interaction-mode)
+                              (mode . emacs-lisp-mode)))
+                 ("dired" (mode . dired-mode))
+                 ("processes" (or (mode . inferior-ess-r-mode)
+                                  (mode . inferior-ess-mode)
+                                  (mode . inferior-python-mode)
+                                  (mode . term-mode)
+                                  (mode . shell-mode)
+                                  (mode . slime-repl-mode)
+                                  (mode . geiser-repl-mode)))
+                 ("Org" (mode . org-mode))))))
 
-;; change the width of the first column.  See
-;; https://emacs.stackexchange.com/a/623/15552
-(setq ibuffer-formats
-      '((mark modified read-only " "
-              (name 40 40 :left :elide) ; change: the two 40 values were originally 18's
-              " "
-              (size 9 -1 :right)
-              " "
-              (mode 16 16 :left :elide)
-              " " filename-and-process)
-        (mark " "
-              (name 16 -1)
-              " " filename)))
+  ;; change the width of the first column.  See
+  ;; https://emacs.stackexchange.com/a/623/15552
+  (setq ibuffer-formats
+        '((mark modified read-only " "
+                (name 40 40 :left :elide) ; change: the two 40 values were originally 18's
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename)))
 
-;; what does this line do?
-(add-hook 'ibuffer-mode-hook
-	  (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
+  ;; what does this line do?
+  (add-hook 'ibuffer-mode-hook
+            (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 
-;; conflicts with ace-window binding
-(require 'ibuffer)
-(define-key ibuffer-mode-map (kbd "M-o") nil)
+  ;; Remove the default keybinding for =ibuffer-mode-map= since it conflicts with
+  ;; ace-window
+  (use-package ibuffer
+    :config
+    (define-key ibuffer-mode-map (kbd "M-o") nil))
 #+END_SRC
 
 
@@ -456,12 +465,13 @@ This doesn't work at all for me?
 
 *** treemacs
 
+See https://github.com/Alexander-Miller/treemacs/.
 #+BEGIN_SRC emacs-lisp
-;; see https://github.com/Alexander-Miller/treemacs
-(require 'treemacs)
-(treemacs-resize-icons 15)
-(global-set-key (kbd "C-c t") 'treemacs)
-(global-set-key (kbd "C-c C-t") 'treemacs-select-window)
+  (use-package treemacs
+    :config
+    (treemacs-resize-icons 15)
+    (global-set-key (kbd "C-c t") 'treemacs)
+    (global-set-key (kbd "C-c C-t") 'treemacs-select-window))
 #+END_SRC
 
 
@@ -471,23 +481,27 @@ This doesn't work at all for me?
 
 ** avy
 
+See https://github.com/abo-abo/avy.  Also see
+https://cestlaz.github.io/posts/using-emacs-7-avy/ for the =use-package=
+version of these commands.
 #+BEGIN_SRC emacs-lisp
-;; see https://github.com/abo-abo/avy.  Also see
-;; https://cestlaz.github.io/posts/using-emacs-7-avy/ for the `use-package`
-;; version of these commands.
-(global-set-key (kbd "C-;") 'avy-goto-char)
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
-(global-set-key (kbd "M-g M-g") 'avy-goto-line)
+  (use-package avy
+    :config
+    (global-set-key (kbd "C-;") 'avy-goto-char)
+    (global-set-key (kbd "C-'") 'avy-goto-char-2)
+    (global-set-key (kbd "M-g M-g") 'avy-goto-line))
 #+END_SRC
 
 
 ** ace-window
 
+ace-window keys used for switching.  Default is 0-9.  See
+https://github.com/abo-abo/ace-window for details regarding ace-window.
 #+BEGIN_SRC emacs-lisp
-;; ace-window keys used for switching.  Default is 0-9.  See
-;; https://github.com/abo-abo/ace-window for details regarding ace-window
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-(setq aw-background nil)
+  (use-package ace-window
+    :config
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (setq aw-background nil))
 #+END_SRC
 
 
@@ -495,51 +509,131 @@ This doesn't work at all for me?
 
 * Editing text
 
-** Parenthsis
+** Parentheses
+
+*** paredit
+
+I'm currently considering whether to use =paredit= and / or =smartparens=.
+Right now I've commented out =paredit=.
+
+See
+https://www.reddit.com/r/emacs/comments/55rwnp/how_does_lispy_paredit_work_for_nonlisp/
+for the following suggestion (which I'm not currently following):
+#+BEGIN_QUOTE
+Don't use =paredit= in non-lisp languages. It is far too strict and you will be
+fighting against it most of the time. I use =smartparens-strict-mode= with
+=sp-use-paredit-bindings= for non-lisp and =paredit= for lisp.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; `paredit` setup.  See http://wikemacs.org/wiki/Paredit-mode for details
+  (autoload 'enable-paredit-mode "paredit"
+    "Turn on pseudo-structural editing of Lisp code."
+    t)
+  ;; (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+  ;; (add-hook 'lisp-mode-hook             'enable-paredit-mode)
+  ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+  ;; (add-hook 'scheme-mode-hook           'enable-paredit-mode)
+  ;; ;; Stop SLIME's REPL from grabbing DEL,
+  ;; ;; which is annoying when backspacing over a '('
+  ;; (defun override-slime-repl-bindings-with-paredit ()
+  ;;   (define-key slime-repl-mode-map
+  ;;     (read-kbd-macro paredit-backward-delete-key)
+  ;;     nil))
+  ;; (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+#+END_SRC
+
+
+*** smartparens
+
+The main page is located at https://github.com/Fuco1/smartparens/.  Also see:
+
+  - http://ebzzry.io/en/emacs-pairs/
+  - https://gist.github.com/pvik/8eb5755cc34da0226e3fc23a320a3c95
+  - https://github.com/Fuco1/smartparens/wiki/
 
 #+BEGIN_SRC emacs-lisp
-;; `paredit` setup.  See http://wikemacs.org/wiki/Paredit-mode for details
-(autoload 'enable-paredit-mode "paredit"
-  "Turn on pseudo-structural editing of Lisp code."
-  t)
-(add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           'enable-paredit-mode)
-;; Stop SLIME's REPL from grabbing DEL,
-;; which is annoying when backspacing over a '('
-(defun override-slime-repl-bindings-with-paredit ()
-  (define-key slime-repl-mode-map
-    (read-kbd-macro paredit-backward-delete-key)
-    nil))
-(add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
-;; see
-;; https://www.reddit.com/r/emacs/comments/55rwnp/how_does_lispy_paredit_work_for_nonlisp/
-;; for the following suggestion:
-;;
-;;     Don't use paredit in non-lisp languages. It is far too strict and you
-;;     will be fighting against it most of the time. I use
-;;     smartparens-strict-mode with sp-use-paredit-bindings for non-lisp and
-;;     paredit for lisp.
+  (use-package smartparens-config
+    :ensure smartparens
+    :config
+    (progn
+      (show-smartparens-global-mode t)
+      (smartparens-strict-mode)
+      (setq sp-highlight-pair-overlay nil)))
+
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
 #+END_SRC
+
+The following code is copied from
+https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el.
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; keybinding management
+  (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
+  (define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
+  (define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
+  (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-<right>") 'sp-forward-slurp-sexp)
+  (define-key smartparens-mode-map (kbd "C-<left>") 'sp-forward-barf-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-D") 'sp-splice-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
+  (define-key smartparens-mode-map (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
+  (define-key smartparens-mode-map (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
+
+  (define-key smartparens-mode-map (kbd "C-]") 'sp-select-next-thing-exchange)
+  (define-key smartparens-mode-map (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+  (define-key smartparens-mode-map (kbd "C-M-]") 'sp-select-next-thing)
+
+  (define-key smartparens-mode-map (kbd "M-F") 'sp-forward-symbol)
+  (define-key smartparens-mode-map (kbd "M-B") 'sp-backward-symbol)
+
+  (define-key smartparens-mode-map (kbd "C-\"") 'sp-change-inner)
+  (define-key smartparens-mode-map (kbd "M-i") 'sp-change-enclosing)'
+#+END_SRC
+
 
 ** Undo
 
 *** Add undo tree
 
+The best documentation for =undo-tree= that I am aware of is obtained by using
+the command =M-x describe-package RET undo-tree RET=.
 #+BEGIN_SRC emacs-lisp
-;; see `M-x describe-package RET undo-tree RET` for more details
-(require 'undo-tree)
-(global-undo-tree-mode)
+  (use-package undo-tree
+    :config
+    (global-undo-tree-mode))
 #+END_SRC
 
 
 ** Yanking text
 
+Bind =M-y= to =browse-kill-ring=.  See
+https://github.com/browse-kill-ring/browse-kill-ring.
 #+BEGIN_SRC emacs-lisp
-;; bind M-y to `browse-kill-ring`.  See
-;; https://github.com/browse-kill-ring/browse-kill-ring.
-(browse-kill-ring-default-keybindings)
+  (use-package browse-kill-ring
+    :config
+    (browse-kill-ring-default-keybindings))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -567,10 +661,12 @@ This doesn't work at all for me?
 						     latex-mode      plain-tex-mode))
 		(let ((mark-even-if-inactive transient-mark-mode))
 		  (indent-region (region-beginning) (region-end) nil))))))
+#+END_SRC
 
-;; search for non-ascii characters in the buffer.  Useful when copying text from
-;; PDFs or other places that can introduce non-ascii character.  See
-;; https://www.emacswiki.org/emacs/FindingNonAsciiCharacters
+Search for non-ASCII characters in the buffer.  Useful when copying text from
+PDFs or other places that can introduce non-ASCII characters.  See
+https://www.emacswiki.org/emacs/FindingNonAsciiCharacters
+#+BEGIN_SRC emacs-lisp
 (defun occur-non-ascii ()
   "Find any non-ascii characters in the current buffer."
   (interactive)
@@ -582,14 +678,16 @@ This doesn't work at all for me?
 
 ** Multiple cursors
 
+See https://github.com/magnars/multiple-cursors.el.
+
 #+BEGIN_SRC emacs-lisp
-;; https://github.com/magnars/multiple-cursors.el
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+  (use-package multiple-cursors
+    :config
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+    (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 #+END_SRC
 
 
@@ -664,6 +762,14 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 
 * Ivy + counsel + swiper
 
+TODO:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy)
+  (use-package swiper)
+  (use-package counsel)
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 ;; copied from https://github.com/abo-abo/swiper
 (ivy-mode 1)
@@ -705,9 +811,12 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 (setq projectile-completion-system 'ivy)
 #+END_SRC
 
+Enable counsel projectile mode.  See
+https://github.com/ericdanan/counsel-projectile/ for details.
 #+BEGIN_SRC emacs-lisp
-;; enable counsel projectile mode
-(counsel-projectile-mode)
+  (use-package counsel-projectile
+    :config
+    (counsel-projectile-mode))
 #+END_SRC
 
 
@@ -722,22 +831,27 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
   :ensure t)
 (which-key-mode)
 (which-key-setup-side-window-bottom)
+#+END_SRC
 
-;; from https://github.com/Wilfred/helpful/
-(global-set-key (kbd "C-h f") #'helpful-callable)
-(global-set-key (kbd "C-h v") #'helpful-variable)
-(global-set-key (kbd "C-h k") #'helpful-key)
-;; Lookup the current symbol at point. C-c C-d is a common keybinding
-;; for this in lisp modes.
-(global-set-key (kbd "C-c C-d") #'helpful-at-point)
-;; Look up *F*unctions (excludes macros).  By default, C-h F is bound to
-;; `Info-goto-emacs-command-node`. Helpful already links to the manual, if a
-;; function is referenced there.
-(global-set-key (kbd "C-h F") #'helpful-function)
-;; Look up *C*ommands.  By default, C-h C is bound to describe
-;; `describe-coding-system`. I don't find this very useful, but it's frequently
-;; useful to only look at interactive functions.
-(global-set-key (kbd "C-h C") #'helpful-command)
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helpful
+    :config
+    ;; from https://github.com/Wilfred/helpful/
+    (global-set-key (kbd "C-h f") #'helpful-callable)
+    (global-set-key (kbd "C-h v") #'helpful-variable)
+    (global-set-key (kbd "C-h k") #'helpful-key)
+    ;; Lookup the current symbol at point. C-c C-d is a common keybinding
+    ;; for this in lisp modes.
+    (global-set-key (kbd "C-c C-d") #'helpful-at-point)
+    ;; Look up *F*unctions (excludes macros).  By default, C-h F is bound to
+    ;; `Info-goto-emacs-command-node`. Helpful already links to the manual, if a
+    ;; function is referenced there.
+    (global-set-key (kbd "C-h F") #'helpful-function)
+    ;; Look up *C*ommands.  By default, C-h C is bound to describe
+    ;; `describe-coding-system`. I don't find this very useful, but it's frequently
+    ;; useful to only look at interactive functions.
+    (global-set-key (kbd "C-h C") #'helpful-command))
 #+END_SRC
 
 
@@ -747,11 +861,13 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 
 ** magit
 
+magit settings
 #+BEGIN_SRC emacs-lisp
-;; magit settings
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
-(setq git-commit-summary-max-length 50)
+  (use-package magit
+    :config
+    (global-set-key (kbd "C-x g") 'magit-status)
+    (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+    (setq git-commit-summary-max-length 50))
 #+END_SRC
 
 
@@ -765,40 +881,42 @@ package index.
 
 
 #+BEGIN_SRC emacs-lisp
-;; load Emacs Speaks Statistics
-(require 'ess-site)
-;; (setq ess-smart-S-assign-key ";")
+  (use-package ess)
 
-;; ESS hook additions.  Note that the duplicate calls to (ess-toggle-S-assign
-;; nil) are correct: the first call clears the default `ess-smart-S-assign'
-;; assignment and the second line re-assigns it to the customized setting.
-(add-hook 'ess-mode-hook
-	  (lambda ()
-	    (ess-set-style 'C++ 'quiet)        ; recommended in R Internals man
-	    (setq ess-fancy-comments nil)      ; disable ESS-style indentation
-	    (setq ess-smart-S-assign-key ";")  ; reassign ' <- ' to ';'
-	    (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
-	    ;; (ess-toggle-S-assign nil)          ; removed due to https://stackoverflow.com/q/50954945
-	    ;; (ess-toggle-S-assign nil)          ; see above comment
-	    (setq-local comment-add 0)         ; so that comments are # not ##
-	    (setq ess-roxy-str "#'")           ; Roxygen comments are #' not ##'
-	    ;; (local-set-key (kbd "C-'") 'ess-switch-to-ESS)
-	    (local-set-key (kbd "C-S-m") (lambda () (interactive) (insert " %>% ")))
-	    (setq inferior-R-args "--no-restore --no-save ")
-	    ;; (add-hook 'local-write-file-hooks
-	    ;; 	      (lambda ()
-	    ;; 		(ess-nuke-trailing-whitespace)))
-	    (setq ess-swv-processor 'knitr)                 ; weaver
-	    (setq ess-swv-pdflatex-commands '("pdflatex"))  ; LaTeX compiler
-	    (setq ess-nuke-trailing-whitespace-p t)         ; strip trailing whitespace w/o query
-	    (setq ess-sas-local-unix-keys t)                ; SAS keys, see section 13.5
-	    ))
+  ;; load Emacs Speaks Statistics
+  (require 'ess-site)
+  ;; (setq ess-smart-S-assign-key ";")
 
-;; use polymode for markdown and R
-(use-package poly-markdown
-  :ensure t)
-(use-package poly-R
-  :ensure t)
+  ;; ESS hook additions.  Note that the duplicate calls to (ess-toggle-S-assign
+  ;; nil) are correct: the first call clears the default `ess-smart-S-assign'
+  ;; assignment and the second line re-assigns it to the customized setting.
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (ess-set-style 'C++ 'quiet)        ; recommended in R Internals man
+              (setq ess-fancy-comments nil)      ; disable ESS-style indentation
+              (setq ess-smart-S-assign-key ";")  ; reassign ' <- ' to ';'
+              (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
+              ;; (ess-toggle-S-assign nil)          ; removed due to https://stackoverflow.com/q/50954945
+              ;; (ess-toggle-S-assign nil)          ; see above comment
+              (setq-local comment-add 0)         ; so that comments are # not ##
+              (setq ess-roxy-str "#'")           ; Roxygen comments are #' not ##'
+              ;; (local-set-key (kbd "C-'") 'ess-switch-to-ESS)
+              (local-set-key (kbd "C-S-m") (lambda () (interactive) (insert " %>% ")))
+              (setq inferior-R-args "--no-restore --no-save ")
+              ;; (add-hook 'local-write-file-hooks
+              ;;        (lambda ()
+              ;;          (ess-nuke-trailing-whitespace)))
+              (setq ess-swv-processor 'knitr)                 ; weaver
+              (setq ess-swv-pdflatex-commands '("pdflatex"))  ; LaTeX compiler
+              (setq ess-nuke-trailing-whitespace-p t)         ; strip trailing whitespace w/o query
+              (setq ess-sas-local-unix-keys t)                ; SAS keys, see section 13.5
+              ))
+
+  ;; use polymode for markdown and R
+  (use-package poly-markdown
+    :ensure t)
+  (use-package poly-R
+    :ensure t)
 #+END_SRC
 
 
@@ -898,6 +1016,8 @@ package index.
 
 ** slime
 
+TODO: I think the slime installation is a little involved.
+
 #+BEGIN_SRC emacs-lisp
 ;; slime settings
 (setq inferior-lisp-program "/usr/bin/sbcl")
@@ -909,29 +1029,33 @@ package index.
 
 
 
-** guile
+** geiser
 
+geiser settings.  Inform geiser that the only Scheme implementation currently
+installed is mit-scheme so that it doesn't try to guess the wrong Scheme for
+buffers.  See http://www.nongnu.org/geiser/geiser_3.html#choosing_002dimpl.
 #+BEGIN_SRC emacs-lisp
-;; guile settings.  Inform guile that the only Scheme implementation currently
-;; installed is mit-scheme so that it doesn't try to guess the wrong Scheme for
-;; buffers.  See http://www.nongnu.org/geiser/geiser_3.html#choosing_002dimpl
-(setq geiser-active-implementations '(mit))
+  (use-package geiser
+    :config
+    (setq geiser-active-implementations '(mit)))
 #+END_SRC
 
 
 
 ** Python
 
+Python settings
 #+BEGIN_SRC emacs-lisp
-;; Python settings
-(elpy-enable)
-(setq elpy-rpc-python-command "/usr/bin/python3")
-(setq python-shell-interpreter (expand-file-name "~/.local/bin/ipython")
-      python-shell-interpreter-args "-i --simple-prompt")
+  (use-package elpy
+    :config
+    (elpy-enable)
+    (setq elpy-rpc-python-command "/usr/bin/python3")
+    (setq python-shell-interpreter (expand-file-name "~/.local/bin/ipython")
+          python-shell-interpreter-args "-i --simple-prompt"))
 
-;; ;; enable autopep8 formatting on save
-;; (require 'py-autopep8)
-;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  ;; ;; enable autopep8 formatting on save
+  ;; (require 'py-autopep8)
+  ;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 #+END_SRC
 
 
@@ -946,12 +1070,18 @@ package index.
 (setq sql-mysql-login-params
       '((user :default "dpritch")
         (server :default "localhost")))
-;; Capitalize keywords in SQL mode
-(add-hook 'sql-mode-hook 'sqlup-mode)
-;; Capitalize keywords in an interactive session (e.g. psql)
-(add-hook 'sql-interactive-mode-hook 'sqlup-mode)
-;; Set a global keyword to use sqlup on a region
-(global-set-key (kbd "C-c u") 'sqlup-capitalize-keywords-in-region)
+#+END_SRC
+
+Use and configure =sqlup-mode=.
+#+BEGIN_SRC emacs-lisp
+  (use-package sqlup-mode
+    :config
+    ;; Capitalize keywords in SQL mode
+    (add-hook 'sql-mode-hook 'sqlup-mode)
+    ;; Capitalize keywords in an interactive session (e.g. psql)
+    (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+    ;; Set a global keyword to use sqlup on a region
+    (global-set-key (kbd "C-c u") 'sqlup-capitalize-keywords-in-region))
 #+END_SRC
 
 

@@ -728,8 +728,9 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 #+BEGIN_SRC emacs-lisp
   ;; https://github.com/magnars/expand-region.el
 
-  (require 'expand-region)
-  (global-set-key (kbd "C-=") 'er/expand-region)
+  (use-package expand-region
+    :config
+    (global-set-key (kbd "C-=") 'er/expand-region))
 #+END_SRC
 
 
@@ -1036,13 +1037,16 @@ package index.
 
 TODO: I think the slime installation is a little involved.
 
+
 #+BEGIN_SRC emacs-lisp
-;; slime settings
-(setq inferior-lisp-program "/usr/bin/sbcl")
-;; also setup the slime-fancy contributed package
-(add-to-list 'slime-contribs 'slime-fancy)
-;; use quicklisp's version of slime
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
+  (use-package slime
+    :config
+    ;; slime settings
+    (setq inferior-lisp-program "/usr/bin/sbcl")
+    ;; also setup the slime-fancy contributed package
+    (add-to-list 'slime-contribs 'slime-fancy)
+    ;; use quicklisp's version of slime
+    (load (expand-file-name "~/quicklisp/slime-helper.el")))
 #+END_SRC
 
 

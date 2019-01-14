@@ -36,6 +36,7 @@
 	read-only-mode
 	scroll-down-line
 	skeleton-pair-insert-maybe
+	sp-backward-delete-char
 	))
 
 (setq mc/cmds-to-run-once

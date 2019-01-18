@@ -97,22 +97,31 @@ file.  This is what is done in the following code block.
 
 ** macOS-specific settings
 
-(when (eq system-type 'darwin)
-  ;; change the meta key to use `command`
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil)
-  ;; ensure that paths set from shell initialization files are added to PATH
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-initialize)
-  ;; ;; BSD ls doesn't support --dired option.  See stackoverflow.com/q/25125200
-  ;; (setq dired-use-ls-dired nil)
-  ;; ;; add local directory on remote for tramp's internal PATH.  See
-  ;; ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Remote-programs.html
-  ;; ;; https://emacs.stackexchange.com/q/24264
-  ;; (require 'tramp)
-  ;; (add-to-list 'tramp-remote-path "/home/dpritchard/.local/bin")
-  )
+#+BEGIN_SRC emacs-lisp
+  ;; ;; an example of how to rewrite the following using use-package.  Lifted from
+  ;; ;; the use-package GitHub README.md.
+  ;; (use-package exec-path-from-shell
+  ;;   :if (memq window-system '(mac ns))
+  ;;   :ensure t
+  ;;   :config
+  ;;   (exec-path-from-shell-initialize))
 
+  (when (eq system-type 'darwin)
+    ;; change the meta key to use `command`
+    (setq mac-command-modifier 'meta)
+    (setq mac-option-modifier nil)
+    ;; ensure that paths set from shell initialization files are added to PATH
+    (require 'exec-path-from-shell)
+    (exec-path-from-shell-initialize)
+    ;; ;; BSD ls doesn't support --dired option.  See stackoverflow.com/q/25125200
+    ;; (setq dired-use-ls-dired nil)
+    ;; ;; add local directory on remote for tramp's internal PATH.  See
+    ;; ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Remote-programs.html
+    ;; ;; https://emacs.stackexchange.com/q/24264
+    ;; (require 'tramp)
+    ;; (add-to-list 'tramp-remote-path "/home/dpritchard/.local/bin")
+    )
+#+END_SRC
 
 
 
@@ -499,9 +508,13 @@ This doesn't seem to work at all for me?
     :config
     ;; remove keybinding''
     (define-key ibuffer-mode-map (kbd "M-o") nil)
-    ;; hide polymode R help buffers
-    (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\[head-tail\\]")
-    (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\*\\[R\\]"))
+
+    ;; (setq ibuffer-never-show-predicates nil)
+    ;; (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\[head-tail\\]")
+    ;; (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\*\\[R\\]")
+    (setq ibuffer-never-show-predicates
+          '("\\*help\\[R\\]\\(.*\\)\\[head-tail\\]"
+            "\\*help\\[R\\]\\(.*\\)\\*\\[R\\]")))
 #+END_SRC
 
 

@@ -241,7 +241,9 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'sas-dir-mode-abbrev-table '())
 
@@ -314,3 +316,4 @@
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'yaml-mode-abbrev-table '())
+

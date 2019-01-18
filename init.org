@@ -892,8 +892,8 @@ magit settings
 
 ** Emasc Speaks Statistics (ESS)
 
-Note: use =R-initialize-on-start= when the documentation isn't working.  See
-https://github.com/emacs-ess/ESS/issues/117.
+Note: sometimes it helps to use =R-initialize-on-start= when the documentation
+isn't working.  See https://github.com/emacs-ess/ESS/issues/117.
 
 Note: =M-x ess-display-package-index=, bound to =C-c C-d i= by default, gives
 package index.
@@ -915,6 +915,7 @@ package index.
               (setq ess-fancy-comments nil)      ; disable ESS-style indentation
               (setq ess-smart-S-assign-key ";")  ; reassign ' <- ' to ';'
               (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
+              (define-key ess-mode-map (kbd "C-j") 'ess-eval-region-or-line-visibly-and-step)
               ;; (ess-toggle-S-assign nil)          ; removed due to https://stackoverflow.com/q/50954945
               ;; (ess-toggle-S-assign nil)          ; see above comment
               (setq-local comment-add 0)         ; so that comments are # not ##
@@ -927,8 +928,9 @@ package index.
               ;;          (ess-nuke-trailing-whitespace)))
               (setq ess-swv-processor 'knitr)                 ; weaver
               (setq ess-swv-pdflatex-commands '("pdflatex"))  ; LaTeX compiler
-              (setq ess-nuke-trailing-whitespace-p t)         ; strip trailing whitespace w/o query
-              (setq ess-sas-local-unix-keys t)                ; SAS keys, see section 13.5
+              ;; (setq ess-nuke-trailing-whitespace-p t)         ; strip trailing whitespace w/o query
+              ;; (setq ess-sas-local-unix-keys t)                ; SAS keys, see section 13.5
+              (setq ess-eval-visibly 'nowait)    ; don't hold Emacs while commands are run
               ))
 
   ;; use polymode for markdown and R

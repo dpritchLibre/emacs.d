@@ -608,66 +608,34 @@ The main page is located at https://github.com/Fuco1/smartparens/.  Also see:
   - http://ebzzry.io/en/emacs-pairs/
   - https://gist.github.com/pvik/8eb5755cc34da0226e3fc23a320a3c95
   - https://github.com/Fuco1/smartparens/wiki/
+  - https://gist.github.com/oantolin/5751fbaa7b8ab4f9570893f2adfe1862
+
+In particular see the above gist for an example of how to overwrite the
+=sp-base-key-bindings=.  See =sp-smartparens-bindings= for a list of the
+bindings.
+
+Note that =M-<backspace>= is originally mapped to =sp-backward-unwrap-sexp=.  If
+this seems important then I might want to add it back in somewhere else.  Also
+look into =sp-rewrap-sexp=.
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartparens-config
     :ensure smartparens
     :config
-    (progn
-      (show-smartparens-global-mode t)
-      (smartparens-strict-mode)
-      (setq sp-highlight-pair-overlay nil)))
+    (show-smartparens-global-mode t)
+    (smartparens-strict-mode)
+    (setq sp-highlight-pair-overlay nil)
+    (custom-set-variables
+     '(sp-base-key-bindings 'sp)
+     '(sp-override-key-bindings
+       '(("M-<backspace>" . nil)
+         ("C-M-t" . sp-transpose-sexp)))))
 
   (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
 #+END_SRC
 
-The following code is copied from
-https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el.
-#+BEGIN_SRC emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; keybinding management
-  (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
 
-  (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
-  (define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
-  (define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
-
-  (define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
-
-  (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
-
-  (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
-
-  (define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
-  (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
-
-  (define-key smartparens-mode-map (kbd "C-<right>") 'sp-forward-slurp-sexp)
-  (define-key smartparens-mode-map (kbd "C-<left>") 'sp-forward-barf-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-backward-barf-sexp)
-
-  (define-key smartparens-mode-map (kbd "M-D") 'sp-splice-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
-  (define-key smartparens-mode-map (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
-  (define-key smartparens-mode-map (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
-
-  (define-key smartparens-mode-map (kbd "C-]") 'sp-select-next-thing-exchange)
-  (define-key smartparens-mode-map (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-  (define-key smartparens-mode-map (kbd "C-M-]") 'sp-select-next-thing)
-
-  (define-key smartparens-mode-map (kbd "M-F") 'sp-forward-symbol)
-  (define-key smartparens-mode-map (kbd "M-B") 'sp-backward-symbol)
-
-  (define-key smartparens-mode-map (kbd "C-\"") 'sp-change-inner)
-  (define-key smartparens-mode-map (kbd "M-i") 'sp-change-enclosing)'
-#+END_SRC
 
 
 ** Undo

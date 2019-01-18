@@ -316,6 +316,7 @@ Enable company mode in all buffers.  See http://company-mode.github.iol
     :config
     ;; loops around suggestions
     (setq company-idle-delay 0.2)
+    (setq company-minimum-prefix-length 2)
 
     ;; (if (display-graphic-p)
     ;;     (define-key company-active-map [tab] 'company-select-next)
@@ -475,7 +476,11 @@ This doesn't seem to work at all for me?
   ;; ace-window
   (use-package ibuffer
     :config
-    (define-key ibuffer-mode-map (kbd "M-o") nil))
+    ;; remove keybinding''
+    (define-key ibuffer-mode-map (kbd "M-o") nil)
+    ;; hide polymode R help buffers
+    (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\[head-tail\\]")
+    (add-to-list 'ibuffer-never-show-predicates "\\*help\\[R\\]\\(.*\\)\\*\\[R\\]"))
 #+END_SRC
 
 
@@ -639,7 +644,7 @@ The best documentation for =undo-tree= that I am aware of is obtained by using
 the command =M-x describe-package RET undo-tree RET=.
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
-    :config
+    :init
     (global-undo-tree-mode))
 #+END_SRC
 

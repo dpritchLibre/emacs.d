@@ -95,6 +95,27 @@ file.  This is what is done in the following code block.
 
 
 
+** macOS-specific settings
+
+(when (eq system-type 'darwin)
+  ;; change the meta key to use `command`
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil)
+  ;; ensure that paths set from shell initialization files are added to PATH
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize)
+  ;; ;; BSD ls doesn't support --dired option.  See stackoverflow.com/q/25125200
+  ;; (setq dired-use-ls-dired nil)
+  ;; ;; add local directory on remote for tramp's internal PATH.  See
+  ;; ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Remote-programs.html
+  ;; ;; https://emacs.stackexchange.com/q/24264
+  ;; (require 'tramp)
+  ;; (add-to-list 'tramp-remote-path "/home/dpritchard/.local/bin")
+  )
+
+
+
+
 ** Emacs config
 
 

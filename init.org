@@ -111,8 +111,9 @@ file.  This is what is done in the following code block.
     (setq mac-command-modifier 'meta)
     (setq mac-option-modifier nil)
     ;; ensure that paths set from shell initialization files are added to PATH
-    (require 'exec-path-from-shell)
-    (exec-path-from-shell-initialize)
+    (use-package exec-path-from-shell
+      :config
+      (exec-path-from-shell-initialize))
     ;; ;; BSD ls doesn't support --dired option.  See stackoverflow.com/q/25125200
     ;; (setq dired-use-ls-dired nil)
     ;; ;; add local directory on remote for tramp's internal PATH.  See
@@ -286,8 +287,10 @@ installed?
 
   ;; specify theme.  See https://stackoverflow.com/a/26555466/5518304 for color
   ;; mods.
-  (load-theme 'zenburn t)
-  (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+  (use-package zenburn-theme
+    :config
+    (load-theme 'zenburn t)
+    (set-face-attribute 'region nil :background "#666" :foreground "#ffffff"))
 #+END_SRC
 
 

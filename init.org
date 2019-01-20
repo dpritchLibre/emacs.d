@@ -277,9 +277,6 @@ Install =hydra=.  See https://github.com/abo-abo/hydra/.
 
 *** Theme
 
-TODO: how do I use =use-package= to ensure that the zenburn package is
-installed?
-
 #+BEGIN_SRC emacs-lisp
   ;; specify custom themes directory
   (setq custom-theme-directory "~/.emacs.d/themes/")
@@ -491,7 +488,11 @@ This doesn't seem to work at all for me?
                                   (mode . shell-mode)
                                   (mode . slime-repl-mode)
                                   (mode . geiser-repl-mode)))
-                 ("Org" (mode . org-mode))))))
+                 ("Org" (mode . org-mode))
+                 ("documentation" (or (mode . Info-mode)
+                                      (mode . helpful-mode)
+                                      (mode . Man-mode)
+                                      (mode . ess-r-help-mode)))))))
 
   ;; change the width of the first column.  See
   ;; https://emacs.stackexchange.com/a/623/15552
@@ -557,6 +558,13 @@ version of these commands.
     (global-set-key (kbd "C-'") 'avy-goto-char-2)
     (global-set-key (kbd "M-g M-g") 'avy-goto-line))
 #+END_SRC
+
+Remove conflicting keybindings.
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map (kbd "C-'") nil)
+#+END_SRC
+
+
 
 
 ** ace-window

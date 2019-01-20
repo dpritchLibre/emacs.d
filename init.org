@@ -172,6 +172,11 @@ file.  This is what is done in the following code block.
   ;; as the file being backed up
   (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
+  ;; stop saving autosave and lockfiles
+  ;; http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html.  Also
+  ;; consider `(setq create-lockfiles nil)`
+  (setq auto-save-default nil)
+
   ;; save history between Emacs instances.  From
   ;; http://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html
   (setq savehist-file "~/.emacs.d/savehist")
@@ -207,7 +212,8 @@ file.  This is what is done in the following code block.
   (setq set-mark-command-repeat-pop t)
 
   ;; remove `C-;` keybinding for `flyspell-auto-correct-previous-word` since we
-  ;; use it for global keybinding to avy TODO
+  ;; use it for global keybinding to avy, and remove `C-M-i` since we use it for
+  ;; global keybinding to `iedit-mode`
   (eval-after-load "flyspell"
     '(progn
        (define-key flyspell-mode-map (kbd "C-;") nil)

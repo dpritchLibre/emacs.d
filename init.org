@@ -1060,7 +1060,9 @@ TODO: I think the slime installation is a little involved.
   (use-package slime
     :config
     ;; slime settings
-    (setq inferior-lisp-program "/usr/bin/sbcl")
+    (setq inferior-lisp-program (if (eq system-type 'darwin)
+                                    "/usr/local/bin/sbcl"
+                                  "/usr/bin/sbcl"))
     ;; also setup the slime-fancy contributed package
     (add-to-list 'slime-contribs 'slime-fancy)
     ;; use quicklisp's version of slime

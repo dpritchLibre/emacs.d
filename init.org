@@ -224,6 +224,17 @@ file.  This is what is done in the following code block.
 
 ** Keybindings
 
+Remove the prefix key keybindings.  From
+http://pragmaticemacs.com/emacs/use-your-digits-and-a-personal-key-map-for-super-shortcuts/.
+You can still use =C-M-1=, =C-M-2=, etc. for this purpose.  Move this somewhere
+else if it sticks (i.e. if I don't find myself missing the keys).
+#+BEGIN_SRC emacs-lisp
+  ;; unset C- and M- digit keys
+  (dotimes (n 10)
+    (global-unset-key (kbd (format "C-%d" n)))
+    (global-unset-key (kbd (format "M-%d" n))))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 ;; add / change keybindings.  See https://github.com/abo-abo/ace-window for
 ;; details regarding ace-window
@@ -561,7 +572,9 @@ version of these commands.
 
 Remove conflicting keybindings.
 #+BEGIN_SRC emacs-lisp
-  (define-key org-mode-map (kbd "C-'") nil)
+  (use-package org
+    :config
+    (define-key org-mode-map (kbd "C-'") nil))
 #+END_SRC
 
 
@@ -839,7 +852,9 @@ TODO:
 
 
 
-* projectile
+* Projects
+
+** projectile
 
 #+BEGIN_SRC emacs-lisp
 ;; see https://github.com/bbatsov/projectile and
@@ -860,6 +875,23 @@ https://github.com/ericdanan/counsel-projectile/ for details.
   (use-package counsel-projectile
     :config
     (counsel-projectile-mode))
+#+END_SRC
+
+
+** eyebrowse
+
+Taken from
+http://pragmaticemacs.com/emacs/easily-manage-emacs-workspaces-with-eyebrowse/.
+Note: use =C-c C-w ,= to name the workspaces.
+#+BEGIN_SRC emacs-lisp
+  (use-package eyebrowse
+    :config
+    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+    (eyebrowse-mode t)
+    (setq eyebrowse-new-workspace t))
 #+END_SRC
 
 

@@ -552,6 +552,14 @@ See https://github.com/Alexander-Miller/treemacs/.
     (global-set-key (kbd "C-c C-t") 'treemacs-select-window))
 #+END_SRC
 
+Use =treemacs-projectile= which adds the command =treemacs-projectile=, which
+gives you an easy interface to add =projectile= projects to =treemacs=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs-projectile
+    :after treemacs projectile)
+#+END_SRC
+
 
 
 
@@ -567,7 +575,9 @@ version of these commands.
     :config
     (global-set-key (kbd "C-;") 'avy-goto-char)
     (global-set-key (kbd "C-'") 'avy-goto-char-2)
-    (global-set-key (kbd "M-g M-g") 'avy-goto-line))
+    (global-set-key (kbd "M-g M-g") 'avy-goto-line)
+    (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+    (global-set-key (kbd "M-g w") 'avy-goto-word-1))
 #+END_SRC
 
 Remove conflicting keybindings.
@@ -811,6 +821,8 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 
 ;; fontify code in code blocks
 (setq org-src-fontify-natively t)
+;; enable curly quotes when exporting files
+(setq org-export-with-smart-quotes t)
 #+END_SRC
 
 

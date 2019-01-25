@@ -23,6 +23,7 @@
 	markdown-outdent-or-delete
 	next-buffer
 	org-beginning-of-line
+	org-delete-char
 	org-end-of-line
 	org-force-self-insert
 	org-self-insert-command
@@ -41,9 +42,9 @@
 
 (setq mc/cmds-to-run-once
       '(
-	TeX-newline
 	ess-r-devtools-load-package
+	eyebrowse-switch-to-window-config-1
+	eyebrowse-switch-to-window-config-2
 	iedit-switch-to-mc-mode
-	markdown-enter-key
 	wdired-finish-edit
 	))

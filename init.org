@@ -268,6 +268,11 @@ else if it sticks (i.e. if I don't find myself missing the keys).
 #+END_SRC
 
 
+Install =crux=.  See https://github.com/bbatsov/crux/.
+#+BEGIN_SRC emacs-lisp
+  (use-package crux)
+#+END_SRC
+
 Install =hydra=.  See https://github.com/abo-abo/hydra/.
 
 #+BEGIN_SRC emacs-lisp

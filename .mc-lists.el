@@ -9,7 +9,9 @@
 	avy-goto-char
 	backward-sexp
 	beginning-of-visual-line
+	counsel-M-x
 	end-of-visual-line
+	ess-roxy-goto-end-of-roxy-comment
 	ess-roxy-move-beginning-of-line
 	ess-smart-S-assign
 	ess-smart-comma
@@ -17,6 +19,7 @@
 	forward-sexp
 	icicle-goto-marker-or-set-mark-command
 	icicle-yank-maybe-completing
+	insert-parentheses
 	keyboard-escape-quit
 	kill-region
 	mark-sexp
@@ -38,6 +41,11 @@
 	scroll-down-line
 	skeleton-pair-insert-maybe
 	sp-backward-delete-char
+	sp-backward-kill-word
+	sp-backward-sexp
+	sp-delete-char
+	sp-kill-word
+	transpose-words
 	))
 
 (setq mc/cmds-to-run-once

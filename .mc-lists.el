@@ -11,8 +11,10 @@
 	beginning-of-visual-line
 	counsel-M-x
 	end-of-visual-line
+	ess-insert-assign
 	ess-roxy-goto-end-of-roxy-comment
 	ess-roxy-move-beginning-of-line
+	ess-roxy-newline-and-indent
 	ess-smart-S-assign
 	ess-smart-comma
 	ess-yank
@@ -44,7 +46,10 @@
 	sp-backward-kill-word
 	sp-backward-sexp
 	sp-delete-char
+	sp-forward-sexp
+	sp-kill-region
 	sp-kill-word
+	sp-unwrap-sexp
 	transpose-words
 	))
 

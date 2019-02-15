@@ -186,9 +186,9 @@ file.  This is what is done in the following code block.
   (setq history-delete-duplicates t)
   (setq savehist-save-minibuffer-history 1)
   (setq savehist-additional-variables
-        '(kill-ring
-          search-ring
-          regexp-search-ring))
+	'(kill-ring
+	  search-ring
+	  regexp-search-ring))
 
   ;; cc mode tab size 4 spaces
   (setq-default c-basic-offset 4)
@@ -198,10 +198,10 @@ file.  This is what is done in the following code block.
 
   ;; change comments to `//` instead of `/* ... */`
   (add-hook 'c-mode-hook (lambda () (setq comment-start "//"
-                                          comment-end   "")))
+					  comment-end   "")))
 
-  ;; show matching parentheses
-  (show-paren-mode 1)
+  ;; ;; show matching parentheses
+  ;; (show-paren-mode 1)
 
   ;; default to truncate lines
   (set-default 'truncate-lines t)
@@ -229,10 +229,10 @@ http://pragmaticemacs.com/emacs/use-your-digits-and-a-personal-key-map-for-super
 You can still use =C-M-1=, =C-M-2=, etc. for this purpose.  Move this somewhere
 else if it sticks (i.e. if I don't find myself missing the keys).
 #+BEGIN_SRC emacs-lisp
-  ;; unset C- and M- digit keys
-  (dotimes (n 10)
-    (global-unset-key (kbd (format "C-%d" n)))
-    (global-unset-key (kbd (format "M-%d" n))))
+  ;; ;; unset C- and M- digit keys
+  ;; (dotimes (n 10)
+  ;;   (global-unset-key (kbd (format "C-%d" n)))
+  ;;   (global-unset-key (kbd (format "M-%d" n))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -679,6 +679,38 @@ look into =sp-rewrap-sexp=.
 
   (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; keybindings for example keybindings
+  ;; https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
+
+  (define-key smartparens-mode-map (kbd "M-g M-f") 'sp-forward-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-b") 'sp-backward-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-g d") 'sp-down-sexp)
+  (define-key smartparens-mode-map (kbd "M-g a") 'sp-backward-down-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-a") 'sp-beginning-of-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-e") 'sp-end-of-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-g u") 'sp-up-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-u") 'sp-backward-up-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+
+  (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-g k") 'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
+  (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+
+  (define-key smartparens-mode-map (kbd "M-g j") 'sp-forward-slurp-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-j") 'sp-forward-barf-sexp)
+  (define-key smartparens-mode-map (kbd "M-g h") 'sp-backward-slurp-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-h") 'sp-backward-barf-sexp)
 #+END_SRC
 
 

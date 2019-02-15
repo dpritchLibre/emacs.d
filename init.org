@@ -908,10 +908,10 @@ Note: use =C-c C-w ,= to name the workspaces.
 #+BEGIN_SRC emacs-lisp
   (use-package eyebrowse
     :config
-    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
-    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
-    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
-    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+    (define-key eyebrowse-mode-map (kbd "C-5") 'eyebrowse-switch-to-window-config-1)
+    (define-key eyebrowse-mode-map (kbd "C-6") 'eyebrowse-switch-to-window-config-2)
+    (define-key eyebrowse-mode-map (kbd "C-7") 'eyebrowse-switch-to-window-config-3)
+    (define-key eyebrowse-mode-map (kbd "C-8") 'eyebrowse-switch-to-window-config-4)
     (eyebrowse-mode t)
     (setq eyebrowse-new-workspace t))
 #+END_SRC

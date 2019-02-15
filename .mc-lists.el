@@ -30,6 +30,7 @@
 	org-delete-char
 	org-end-of-line
 	org-force-self-insert
+	org-return
 	org-self-insert-command
 	paredit-backward
 	paredit-backward-kill-word

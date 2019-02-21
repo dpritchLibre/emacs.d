@@ -545,7 +545,22 @@ This doesn't seem to work at all for me?
 #+END_SRC
 
 
+
+
 ** Directory tree modes
+
+*** neotree
+
+See
+  * https://github.com/jaypei/emacs-neotree
+  * https://www.emacswiki.org/emacs/NeoTree
+
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree)
+#+END_SRC
+
+
+
 
 *** treemacs
 

@@ -556,7 +556,13 @@ See
   * https://www.emacswiki.org/emacs/NeoTree
 
 #+BEGIN_SRC emacs-lisp
-  (use-package neotree)
+  ;; use the following command to toggle the display icons: `(setq neo-theme (if
+  ;; (display-graphic-p) 'icons 'classic))'
+
+  ;; set up neotree
+  (use-package neotree
+    :config
+    (global-set-key (kbd "<f12>") 'neotree-toggle))
 #+END_SRC
 
 
@@ -713,8 +719,9 @@ https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
   ;; override `transpose-sexps`
   (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
 
-  (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
+  ;; ;; these don't seem to be commands any more
+  ;; (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
+  ;; (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
 
   (define-key smartparens-mode-map (kbd "M-g k") 'sp-kill-sexp)
   (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
@@ -895,6 +902,9 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
   (setq org-src-fontify-natively t)
   ;; enable curly quotes when exporting files
   (setq org-export-with-smart-quotes t)
+
+  ;; create a mapping from org mode Scheme code blocks to LaTeX listings Lisp
+  (add-to-list 'org-latex-listings-langs '(scheme "Lisp"))
 #+END_SRC
 
 

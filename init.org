@@ -407,6 +407,19 @@ https://github.com/joaotavora/yasnippet.
 #+END_SRC
 
 
+
+
+** auto-yasnippet
+
+Enable temporary snippets.  See https://github.com/abo-abo/auto-yasnippet.
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-yasnippet
+    :config
+    (global-set-key (kbd "M-g M-p") #'aya-create)
+    (global-set-key (kbd "M-g M-o") #'aya-expand))
+#+END_SRC
+
+
 This doesn't seem to work at all for me?
 
 #+BEGIN_SRC emacs-lisp
@@ -929,6 +942,15 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
 
   ;; create a mapping from org mode Scheme code blocks to LaTeX listings Lisp
   (add-to-list 'org-latex-listings-langs '(scheme "Lisp"))
+
+  ;; use CSS selectors instead of inline styles.  By default Org mode will use the
+  ;; font colors from your theme, and this allows you to specify the font colors
+  ;; of the export through a CSS file instead.
+  (setq org-html-htmlize-output-type 'css)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map (kbd "C-M-i") nil)
 #+END_SRC
 
 

@@ -476,6 +476,30 @@ This doesn't seem to work at all for me?
 #+END_SRC
 
 
+
+
+** Sunrise commander
+
+See the following for info:
+  * https://www.emacswiki.org/emacs/Sunrise_Commander
+  * https://github.com/escherdragon/sunrise-commander
+  * https://medium.com/@enzuru/sunrise-commander-an-orthodox-file-manager-for-emacs-2f92fd08ac9e
+  * http://pragmaticemacs.com/emacs/double-dired-with-sunrise-commander/
+
+Use the commands =sunrise= or =sunrise-cd= to start.
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/other-packages/sunrise-commander")
+
+  (require 'sunrise-commander)
+  (require 'sunrise-x-buttons)
+  (require 'sunrise-x-modeline)
+
+  (add-to-list 'auto-mode-alist '("\\.srvm\\'" . sr-virtual-mode))
+#+END_SRC
+
+
+
+
 ** Ibuffer settings
 
 #+BEGIN_SRC emacs-lisp

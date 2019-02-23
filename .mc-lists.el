@@ -51,6 +51,7 @@
 	sp-forward-sexp
 	sp-kill-region
 	sp-kill-word
+	sp-transpose-sexp
 	sp-unwrap-sexp
 	transpose-words
 	))

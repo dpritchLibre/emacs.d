@@ -738,6 +738,12 @@ look into =sp-rewrap-sexp=.
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
 #+END_SRC
 
+By default the backtick "`" is paired with a single quote in "'" scheme-mode,
+but it shouldn't be since this is used for quasiquotation.
+#+BEGIN_SRC emacs-lisp
+  (sp-local-pair 'scheme-mode "`" nil :actions :rem)
+#+END_SRC
+
 
 Keybindings for example keybindings
 https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
@@ -763,8 +769,10 @@ https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
   (define-key smartparens-mode-map (kbd "M-g k") 'sp-kill-sexp)
   (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
 
-  (define-key smartparens-mode-map (kbd "M-g M-<delete>") 'sp-unwrap-sexp)
-  (define-key smartparens-mode-map (kbd "M-g <delete>") 'sp-backward-unwrap-sexp)
+  ;; (define-key smartparens-mode-map (kbd "M-g M-<delete>") 'sp-unwrap-sexp)
+  ;; (define-key smartparens-mode-map (kbd "M-g <delete>") 'sp-backward-unwrap-sexp)
+  (define-key smartparens-mode-map (kbd "M-g M-<backspace>") 'sp-unwrap-sexp)
+  (define-key smartparens-mode-map (kbd "M-g <backspace>") 'sp-backward-unwrap-sexp)
 
   (define-key smartparens-mode-map (kbd "M-g M-j") 'sp-forward-slurp-sexp)
   (define-key smartparens-mode-map (kbd "M-g M-k") 'sp-forward-barf-sexp)

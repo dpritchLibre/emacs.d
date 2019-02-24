@@ -344,9 +344,19 @@ perform).  See https://github.com/seagle0128/doom-modeline/ for details.
 It is also suggested by the author of =doom-modeline= to use =doom-themes= (I
 haven't done so yet).  See https://github.com/hlissner/emacs-doom-themes/.
 #+BEGIN_SRC emacs-lisp
-  (use-package doom-modeline
-    :defer t
-    :hook (after-init . doom-modeline-init))
+  ;; (use-package doom-modeline
+  ;;   :defer t
+  ;;   :hook (after-init . doom-modeline-init))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package spaceline
+    :demand t
+    :init
+    (setq powerline-default-separator 'arrow-fade)
+    :config
+    (require 'spaceline-config)
+    (spaceline-spacemacs-theme))
 #+END_SRC
 
 

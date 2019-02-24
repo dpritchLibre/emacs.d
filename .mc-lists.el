@@ -22,6 +22,7 @@
 	forward-sexp
 	icicle-goto-marker-or-set-mark-command
 	icicle-yank-maybe-completing
+	indent-for-tab-command
 	insert-parentheses
 	keyboard-escape-quit
 	kill-region
@@ -51,6 +52,7 @@
 	sp-forward-sexp
 	sp-kill-region
 	sp-kill-word
+	sp-next-sexp
 	sp-transpose-sexp
 	sp-unwrap-sexp
 	transpose-words

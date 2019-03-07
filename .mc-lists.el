@@ -11,6 +11,7 @@
 	backward-sexp
 	beginning-of-visual-line
 	counsel-M-x
+	cycle-spacing
 	end-of-visual-line
 	ess-insert-assign
 	ess-roxy-goto-end-of-roxy-comment

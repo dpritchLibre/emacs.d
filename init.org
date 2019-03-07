@@ -126,6 +126,16 @@ file.  This is what is done in the following code block.
 
 
 
+
+** Load non-ELPA code
+
+#+BEGIN_SRC emacs-lisp
+  (load (expand-file-name "~/.emacs.d/lisp/pinned-buffer-mode.el"))
+#+END_SRC
+
+
+
+
 ** Emacs config
 
 
@@ -344,19 +354,32 @@ perform).  See https://github.com/seagle0128/doom-modeline/ for details.
 It is also suggested by the author of =doom-modeline= to use =doom-themes= (I
 haven't done so yet).  See https://github.com/hlissner/emacs-doom-themes/.
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package doom-modeline
-  ;;   :defer t
-  ;;   :hook (after-init . doom-modeline-init))
+  (use-package doom-modeline
+    :defer t
+    :hook (after-init . doom-modeline-init))
 #+END_SRC
 
+I've also tried =spaceline=.
 #+BEGIN_SRC emacs-lisp
-  (use-package spaceline
-    :demand t
-    :init
-    (setq powerline-default-separator 'arrow-fade)
-    :config
-    (require 'spaceline-config)
-    (spaceline-spacemacs-theme))
+  ;; (use-package spaceline
+  ;;   :demand t
+  ;;   :init
+  ;;   (setq powerline-default-separator 'arrow-fade)
+  ;;   :config
+  ;;   (require 'spaceline-config)
+  ;;   (spaceline-spacemacs-theme))
+#+END_SRC
+
+
+
+
+*** all-the-icons
+
+Note that you have to run =M-x all-the-icons-install-fonts= in order to actually
+install the fonts.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons :defer 0.5)
 #+END_SRC
 
 

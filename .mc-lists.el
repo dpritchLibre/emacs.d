@@ -13,6 +13,7 @@
 	counsel-M-x
 	cycle-spacing
 	end-of-visual-line
+	ess-indent-or-complete
 	ess-insert-assign
 	ess-roxy-goto-end-of-roxy-comment
 	ess-roxy-move-beginning-of-line
@@ -50,6 +51,7 @@
 	sp-backward-kill-word
 	sp-backward-sexp
 	sp-delete-char
+	sp-end-of-sexp
 	sp-forward-sexp
 	sp-kill-region
 	sp-kill-word
@@ -61,9 +63,11 @@
 
 (setq mc/cmds-to-run-once
       '(
+	ace-window
 	ess-r-devtools-load-package
 	eyebrowse-switch-to-window-config-1
 	eyebrowse-switch-to-window-config-2
 	iedit-switch-to-mc-mode
+	scroll-up-line
 	wdired-finish-edit
 	))

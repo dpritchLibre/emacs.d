@@ -58,6 +58,7 @@
 	sp-kill-region
 	sp-kill-word
 	sp-next-sexp
+	sp-remove-active-pair-overlay
 	sp-transpose-sexp
 	sp-unwrap-sexp
 	transpose-words
@@ -70,6 +71,7 @@
 	eyebrowse-switch-to-window-config-1
 	eyebrowse-switch-to-window-config-2
 	iedit-switch-to-mc-mode
+	inferior-ess-send-input
 	scroll-other-window
 	scroll-up-line
 	wdired-finish-edit

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: scheme-source-block
+# key: srcsc
+# --
+#+ATTR_LATEX: :options morekeywords={define,lambda,if},deletekeywords={abs,gcd}
+#+BEGIN_SRC scheme$0
+#+END_SRC

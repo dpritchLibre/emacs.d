@@ -1,0 +1,33 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("(elisp) List Variables"
+ (front-context-string . "ns modify lists ")
+ (rear-context-string . "\n\n   Two functio")
+ (position . 271211)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "List Variables")
+ (handler . Info-bookmark-jump))
+("(elisp) Strings and Characters"
+ (front-context-string . "\n4 Strings and C")
+ (rear-context-string . "mbers,  Up: Top\n")
+ (position . 203163)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "Strings and Characters")
+ (handler . Info-bookmark-jump))
+("(elisp) Numbers"
+ (front-context-string . "\n3 Numbers\n*****")
+ (rear-context-string . "Types,  Up: Top\n")
+ (position . 168712)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "Numbers")
+ (handler . Info-bookmark-jump))
+("(elisp) Array Type"
+ (front-context-string . "\n2.3.7 Array Typ")
+ (rear-context-string . "ogramming Types\n")
+ (position . 126849)
+ (filename . "/usr/share/info/elisp")
+ (info-node . "Array Type")
+ (handler . Info-bookmark-jump))
+)

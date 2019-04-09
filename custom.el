@@ -9,6 +9,14 @@
  '(package-selected-packages
    (quote
     (golden-ratio powerline spaceline treemacs-projectile eyebrowse company-math smartparens rainbow-delimiters expand-region auto-yasnippet ws-butler treemacs doom-modeline which-key evil-escape evil neotree poly-R poly-markdown ivy-hydra hydra ag counsel-projectile iedit undo-tree crux projectile helpful wgrep counsel swiper ivy avy yasnippet minions solarized-theme moody browse-kill-ring haskell-mode gitignore-mode gitconfig-mode gitattributes-mode pdf-tools tablist htmlize markdown-preview-mode markdown-mode paredit auctex ace-window magit flycheck yasnippet-snippets auto-complete sqlup-mode load-theme-buffer-local zenburn-theme multiple-cursors geiser ess elpy)))
+ '(safe-local-variable-values
+   (quote
+    ((flycheck-clang-language-standard . "c++11")
+     (eval setq flycheck-clang-include-path
+           (quote
+            ("/usr/local/include/" "/usr/share/R/include/")))
+     (prog-mode-hook function ws-butler-mode)
+     (before-save-hook))))
  '(sp-base-key-bindings (quote sp))
  '(sp-override-key-bindings (quote (("M-<backspace>")))))
 (custom-set-faces

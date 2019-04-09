@@ -27,7 +27,7 @@
 
 * Configuration
 
-TODO
+TODO: description
 
 ** Basic Configuration
 
@@ -773,6 +773,15 @@ https://github.com/abo-abo/ace-window for details regarding ace-window.
 
 
 
+** Searching text in files
+
+*** deadgrep
+
+(use-package deadgrep)
+
+
+
+
 * Editing text
 
 ** Parentheses
@@ -793,9 +802,9 @@ fighting against it most of the time. I use =smartparens-strict-mode= with
 
 #+BEGIN_SRC emacs-lisp :tangle no
   ;; `paredit` setup.  See http://wikemacs.org/wiki/Paredit-mode for details
-  (autoload 'enable-paredit-mode "paredit"
-    "Turn on pseudo-structural editing of Lisp code."
-    t)
+  ;; (autoload 'enable-paredit-mode "paredit"
+  ;;   "Turn on pseudo-structural editing of Lisp code."
+  ;;   t)
   ;; (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
   ;; (add-hook 'lisp-mode-hook             'enable-paredit-mode)
   ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)

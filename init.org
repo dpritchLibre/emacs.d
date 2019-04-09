@@ -325,6 +325,7 @@ Install =hydra=.  See https://github.com/abo-abo/hydra/.
 (set-face-attribute 'default nil :height 110)
 #+END_SRC
 
+
 *** Theme
 
 #+BEGIN_SRC emacs-lisp
@@ -407,7 +408,54 @@ install the fonts.
 #+END_SRC
 
 
+*** golden-ratio
 
+See https://github.com/roman/golden-ratio.el.  Code borrowed from
+https://github.com/roman/golden-ratio.el/issues/68.
+#+BEGIN_SRC emacs-lisp
+  (use-package golden-ratio
+    :config
+    (define-advice select-window (:after (window &optional no-record) golden-ratio-resize-window)
+      (golden-ratio)
+      nil))
+#+END_SRC
+
+
+
+
+** Remote connections
+
+*** Tramp
+
+Use the remote's values for =PATH= rather than the values that Tramp tries to
+set for it.  Note that for some reason, adding entries to =tramp-remote-path=
+doesn't have any effect for me.  However, most of the time the value for =PATH=
+set by the startup files on the remote is what I want anyway.  To do this, you
+can simply add the symbol =tramp-remote-path= to the front of
+=tramp-remote-path=, which acts as a sentinal value (and ignores the other
+values behind it).
+
+Note that the shell used by Tramp is by default the shell called by =/bin/sh=,
+so the startup is different than for Bash.  In particular it will invoke
+=.profile= rather than =.bashrc= or =.bash_profile=.
+
+As previously mentioned, I wasn't able to have any effect on the value of =PATH=
+on the remote by any other means.  I tried using a command such as =(add-to-list
+'tramp-remote-path "/some/path")=, using =(setq tramp-remote-path (cdr
+tramp-remote-path))= (in order to remove the leading =tramp-default-remote-path=
+symbol from the default value), and deleting =.emacs.d/tramp=.  None of these
+had any effect.
+
+For more detail, see the following links:
+  * https://www.gnu.org/software/emacs/manual/html_node/tramp/Remote-programs.html
+  * https://www.gnu.org/software/emacs/manual/html_node/tramp/Connection-caching.html#Connection-caching
+  * https://stackoverflow.com/questions/26630640/tramp-ignores-tramp-remote-path
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tramp
+    :config
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+#+END_SRC
 
 * Auto-complete and textual substitution
 

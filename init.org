@@ -301,6 +301,21 @@ Install =hydra=.  See https://github.com/abo-abo/hydra/.
 
 
 
+*** Evil mode
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package evil-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package evil-escape
+  ;;   :config
+  ;;   (setq-default evil-escape-key-sequence "kj"))
+#+END_SRC
+
+
+
+
 ** Appearance
 
 *** Font size

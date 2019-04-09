@@ -1,4 +1,4 @@
-(defun dp-info (file-or-node)
+(defun dp-info (&optional file-or-node)
   "Open an info buffer with a unique filename.
 
 This function opens an info page as specified by FILE-OR-NODE.
@@ -27,12 +27,20 @@ semantics of FILE-OR-NODE."
          (new-buf-nm               (concat "*info*<" (number-to-string buf-info-max-plus1-num) ">")))
     (info file-or-node new-buf-nm)))
 
+
 (defun dp-info-dired ()
   "Open the Dired node in the Emacs info."
   (interactive)
   (dp-info "(Emacs) Dired"))
 
+
 (defun dp-info-dired-x ()
   "Open the Dired-x info."
   (interactive)
   (dp-info "(Dired-x)"))
+
+
+(defun dp-info-sicp ()
+  "Open the SICP info."
+  (interactive)
+  (dp-info "~/.emacs.d/info/sicp.info.gz"))

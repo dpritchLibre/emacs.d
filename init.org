@@ -130,6 +130,8 @@ file.  This is what is done in the following code block.
 ** Load non-ELPA code
 
 #+BEGIN_SRC emacs-lisp
+  (load (expand-file-name "~/.emacs.d/lisp/fill-line-with-hyphens.el"))
+  (load (expand-file-name "~/.emacs.d/lisp/info-open.el"))
   (load (expand-file-name "~/.emacs.d/lisp/pinned-buffer-mode.el"))
 #+END_SRC
 
@@ -138,7 +140,7 @@ file.  This is what is done in the following code block.
 
 ** Emacs config
 
-
+Basic configurations
 
 #+BEGIN_SRC emacs-lisp
   ;; has the effect of adding `:ensure t` to every `use-package` call
@@ -296,6 +298,13 @@ Install =hydra=.  See https://github.com/abo-abo/hydra/.
 
 #+BEGIN_SRC emacs-lisp
   (use-package hydra)
+#+END_SRC
+
+
+Personal library
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C--") #'dp-fill-line-with-hyphens)
 #+END_SRC
 
 

@@ -919,6 +919,64 @@ https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
 #+END_SRC
 
 
+Taken from
+https://github.com/abo-abo/hydra/wiki/smartparens
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-smartparens (:hint nil)
+    "
+   Moving^^^^                       Slurp & Barf^^   Wrapping^^            Sexp juggling^^^^               Destructive
+  ------------------------------------------------------------------------------------------------------------------------
+   [_a_] beginning  [_n_] down      [_h_] bw slurp   [_R_]   rewrap        [_S_] split   [_t_] transpose   [_c_] change inner  [_w_] copy
+   [_e_] end        [_N_] bw down   [_H_] bw barf    [_u_]   unwrap        [_s_] splice  [_A_] absorb      [_C_] change outer
+   [_f_] forward    [_p_] up        [_l_] slurp      [_U_]   bw unwrap     [_r_] raise   [_E_] emit        [_k_] kill          [_g_] quit
+   [_b_] backward   [_P_] bw up     [_L_] barf       [_(__{__[_] wrap (){}[]   [_j_] join    [_o_] convolute   [_K_] bw kill       [_q_] quit"
+    ;; Moving
+    ("a" sp-beginning-of-sexp)
+    ("e" sp-end-of-sexp)
+    ("f" sp-forward-sexp)
+    ("b" sp-backward-sexp)
+    ("n" sp-down-sexp)
+    ("N" sp-backward-down-sexp)
+    ("p" sp-up-sexp)
+    ("P" sp-backward-up-sexp)
+
+    ;; Slurping & barfing
+    ("h" sp-backward-slurp-sexp)
+    ("H" sp-backward-barf-sexp)
+    ("l" sp-forward-slurp-sexp)
+    ("L" sp-forward-barf-sexp)
+
+    ;; Wrapping
+    ("R" sp-rewrap-sexp)
+    ("u" sp-unwrap-sexp)
+    ("U" sp-backward-unwrap-sexp)
+    ("(" sp-wrap-round)
+    ("{" sp-wrap-curly)
+    ("[" sp-wrap-square)
+
+    ;; Sexp juggling
+    ("S" sp-split-sexp)
+    ("s" sp-splice-sexp)
+    ("r" sp-raise-sexp)
+    ("j" sp-join-sexp)
+    ("t" sp-transpose-sexp)
+    ("A" sp-absorb-sexp)
+    ("E" sp-emit-sexp)
+    ("o" sp-convolute-sexp)
+
+    ;; Destructive editing
+    ("c" sp-change-inner :exit t)
+    ("C" sp-change-enclosing :exit t)
+    ("k" sp-kill-sexp)
+    ("K" sp-backward-kill-sexp)
+    ("w" sp-copy-sexp)
+
+    ("q" nil)
+    ("g" nil))
+#+END_SRC
+
+
 
 
 ** Undo
@@ -999,6 +1057,36 @@ See https://github.com/magnars/multiple-cursors.el.
 #+END_SRC
 
 
+Taken from
+https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
+
+#+BEGIN_SRC emacs-lisp
+  ;; Hydra - Multiple cursors
+  (defhydra hydra-multiple-cursors (:columns 3
+                                             :idle 1.0)
+    "Multiple cursors"
+    ("l" mc/edit-lines "Edit lines in region" :exit t)
+    ("b" mc/edit-beginnings-of-lines "Edit beginnings of lines in region" :exit t)
+    ("e" mc/edit-ends-of-lines "Edit ends of lines in region" :exit t)
+    ("a" mc/mark-all-dwim "Mark all dwim" :exit t)
+    ("S" mc/mark-all-symbols-like-this "Mark all symbols likes this" :exit t)
+    ("w" mc/mark-all-words-like-this "Mark all words like this" :exit t)
+    ("r" mc/mark-all-in-region "Mark all in region" :exit t)
+    ("R" mc/mark-all-in-region-regexp "Mark all in region (regexp)" :exit t)
+    ("d" mc/mark-all-like-this-in-defun "Mark all like this in defun" :exit t)
+    ("s" mc/mark-all-symbols-like-this-in-defun "Mark all symbols like this in defun" :exit t)
+    ("W" mc/mark-all-words-like-this-in-defun "Mark all words like this in defun" :exit t)
+    ("i" mc/insert-numbers "Insert numbers" :exit t)
+    ("n" mc/mark-next-like-this "Mark next like this")
+    ("N" mc/skip-to-next-like-this "Skip to next like this")
+    ("M-n" mc/unmark-next-like-this "Unmark next like this")
+    ("p" mc/mark-previous-like-this "Mark previous like this")
+    ("P" mc/skip-to-previous-like-this "Skip to previous like this")
+    ("M-p" mc/unmark-previous-like-this "Unmark previous like this")
+    ("q" nil "Quit" :exit t))
+#+END_SRC
+
+
 ** iedit
 
 #+BEGIN_SRC emacs-lisp
@@ -1021,6 +1109,46 @@ the region by pressing =-= (the minus key), but this doesn't work for me (why?).
   (use-package expand-region
     :config
     (global-set-key (kbd "C-=") 'er/expand-region))
+#+END_SRC
+
+
+Taken from https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
+
+#+BEGIN_SRC emacs-lisp
+  ;; hydra - marking
+  (defhydra hydra-mark (:exit t
+                              :columns 3
+                              :idle 1.0)
+    "Mark"
+    ("d" er/mark-defun "Defun / Function")
+    ("f" er/mark-defun "Defun / Function")
+    ("F" er/mark-clj-function-literal "Clj anonymous fn")
+    ("w" er/mark-word "Word")
+    ("W" er/mark-clj-word "CLJ word")
+    ("u" er/mark-url "Url")
+    ("e" mark-sexp "S-Expression")
+    ("E" er/mark-email "Email")
+    ("b" mark-whole-buffer "Buffer")
+    ("p" er/mark-text-paragraph "Paragraph")
+    ("r" er/mark-clj-regexp-literal "Clj regexp")
+    ("s" er/mark-symbol "Symbol")
+    ("S" er/mark-symbol-with-prefix "Prefixed symbol")
+    ("q" er/mark-inside-quotes "Inside quotes")
+    ("Q" er/mark-outside-quotes "Outside quotes")
+    ("(" er/mark-inside-pairs "Inside pairs")
+    ("[" er/mark-inside-pairs "Inside pairs")
+    ("{" er/mark-inside-pairs "Inside pairs")
+    (")" er/mark-outside-pairs "Outside pairs")
+    ("]" er/mark-outside-pairs "Outside pairs")
+    ("}" er/mark-outside-pairs "Outside pairs")
+    ("t" er/mark-inner-tag "Inner tag")
+    ("T" er/mark-outer-tag "Outer tag")
+    ("c" er/mark-comment "Comment")
+    ("a" er/mark-html-attribute "HTML attribute")
+    ("." er/expand-region "Expand region" :exit nil)
+    ("," er/contract-region "Contract region" :exit nil)
+    ("#" er/mark-clj-set-literal "Clj set")
+    )
 #+END_SRC
 
 
@@ -1146,6 +1274,56 @@ https://github.com/ericdanan/counsel-projectile/ for details.
   (use-package counsel-projectile
     :config
     (counsel-projectile-mode))
+#+END_SRC
+
+Taken from
+https://github.com/abo-abo/hydra/wiki/Projectile
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-projectile-other-window (:color teal)
+    "projectile-other-window"
+    ("f"  projectile-find-file-other-window        "file")
+    ("g"  projectile-find-file-dwim-other-window   "file dwim")
+    ("d"  projectile-find-dir-other-window         "dir")
+    ("b"  projectile-switch-to-buffer-other-window "buffer")
+    ("q"  nil                                      "cancel" :color blue))
+
+  (defhydra hydra-projectile (:color teal
+                                     :hint nil)
+    "
+       PROJECTILE: %(projectile-project-root)
+
+       Find File            Search/Tags          Buffers                Cache
+  ------------------------------------------------------------------------------------------
+  _s-f_: file            _a_: ag                _i_: Ibuffer           _c_: cache clear
+   _ff_: file dwim       _g_: update gtags      _b_: switch to buffer  _x_: remove known project
+   _fd_: file curr dir   _o_: multi-occur     _s-k_: Kill all buffers  _X_: cleanup non-existing
+    _r_: recent file                                               ^^^^_z_: cache current
+    _d_: dir
+
+  "
+    ("a"   projectile-ag)
+    ("b"   projectile-switch-to-buffer)
+    ("c"   projectile-invalidate-cache)
+    ("d"   projectile-find-dir)
+    ("s-f" projectile-find-file)
+    ("ff"  projectile-find-file-dwim)
+    ("fd"  projectile-find-file-in-directory)
+    ("g"   ggtags-update-tags)
+    ("s-g" ggtags-update-tags)
+    ("i"   projectile-ibuffer)
+    ("K"   projectile-kill-buffers)
+    ("s-k" projectile-kill-buffers)
+    ("m"   projectile-multi-occur)
+    ("o"   projectile-multi-occur)
+    ("s-p" projectile-switch-project "switch project")
+    ("p"   projectile-switch-project)
+    ("s"   projectile-switch-project)
+    ("r"   projectile-recentf)
+    ("x"   projectile-remove-known-project)
+    ("X"   projectile-cleanup-known-projects)
+    ("z"   projectile-cache-current-file)
+    ("`"   hydra-projectile-other-window/body "other window")
+    ("q"   nil "cancel" :color blue))
 #+END_SRC
 
 

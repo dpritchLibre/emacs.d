@@ -534,10 +534,10 @@ Enable temporary snippets.  See https://github.com/abo-abo/auto-yasnippet.
 #+END_SRC
 
 
-This doesn't seem to work at all for me?
+This doesn't seem to work at all for me?  Taken from
+https://www.reddit.com/r/emacs/comments/8rxm7h/tip_how_to_better_manage_your_spelling_mistakes/
 
 #+BEGIN_SRC emacs-lisp
-  ;; see https://www.reddit.com/r/emacs/comments/8rxm7h/tip_how_to_better_manage_your_spelling_mistakes/
   (use-package abbrev
     :defer 1
     :ensure nil

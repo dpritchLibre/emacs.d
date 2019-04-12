@@ -1244,8 +1244,8 @@ package index.
   ;; assignment and the second line re-assigns it to the customized setting.
   (add-hook 'ess-mode-hook
             (lambda ()
-              (ess-set-style 'C++ 'quiet)        ; recommended in R Internals man
-              (setq ess-fancy-comments nil)      ; disable ESS-style indentation
+              (ess-set-style 'C++ 'quiet)                    ; recommended in R Internals man
+              (setq ess-indent-with-fancy-comments nil)      ; disable ESS-style indentation
               (setq ess-smart-S-assign-key ";")  ; reassign ' <- ' to ';'
               (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
               (define-key ess-mode-map (kbd "C-j") 'ess-eval-region-or-line-visibly-and-step)

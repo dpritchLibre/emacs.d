@@ -73,8 +73,16 @@
       '(
         ace-window
         ess-r-devtools-load-package
+        ess-set-style
         eyebrowse-switch-to-window-config-1
         eyebrowse-switch-to-window-config-2
+        hydra-multiple-cursors/mc/mark-all-words-like-this-in-defun-and-exit
+        hydra-multiple-cursors/mc/mark-next-like-this
+        hydra-multiple-cursors/mc/mark-previous-like-this
+        hydra-multiple-cursors/mc/skip-to-next-like-this
+        hydra-multiple-cursors/mc/skip-to-previous-like-this
+        hydra-multiple-cursors/mc/unmark-next-like-this
+        hydra-multiple-cursors/mc/unmark-previous-like-this
         iedit-switch-to-mc-mode
         inferior-ess-send-input
         scroll-other-window

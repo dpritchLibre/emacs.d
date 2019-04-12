@@ -93,6 +93,12 @@
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
 
+(define-abbrev-table 'epa-info-mode-abbrev-table '())
+
+(define-abbrev-table 'epa-key-list-mode-abbrev-table '())
+
+(define-abbrev-table 'epa-key-mode-abbrev-table '())
+
 (define-abbrev-table 'eshell-mode-abbrev-table '())
 
 (define-abbrev-table 'ess-bugs-mode-abbrev-table '())
@@ -105,13 +111,19 @@
 
 (define-abbrev-table 'ess-jags-mode-abbrev-table '())
 
+(define-abbrev-table 'ess-julia-help-mode-abbrev-table '())
+
 (define-abbrev-table 'ess-julia-mode-abbrev-table '())
 
 (define-abbrev-table 'ess-mode-abbrev-table '())
 
 (define-abbrev-table 'ess-r-help-mode-abbrev-table '())
 
-(define-abbrev-table 'ess-r-mode-abbrev-table '())
+(define-abbrev-table 'ess-r-mode-abbrev-table
+  '(
+    ("purr" "purrr" nil 3)
+    ("purrrr" "purrr" nil 2)
+   ))
 
 (define-abbrev-table 'ess-r-transcript-mode-abbrev-table '())
 
@@ -126,6 +138,8 @@
 (define-abbrev-table 'ess-watch-mode-abbrev-table '())
 
 (define-abbrev-table 'ffip-diff-mode-abbrev-table '())
+
+(define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
@@ -520,6 +534,7 @@
     ("frmo" "from" nil 0)
     ("fromt he" "from the" nil 0)
     ("fromthe" "from the" nil 0)
+    ("functoin" "function" nil 4)
     ("furneral" "funeral" nil 0)
     ("fwe" "few" nil 0)
     ("garantee" "guarantee" nil 0)
@@ -1065,8 +1080,6 @@
     ("yuor" "your" nil 2)
    ))
 
-(define-abbrev-table 'global-abbrev-table '())
-
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
 (define-abbrev-table 'gud-mode-abbrev-table '())
@@ -1077,9 +1090,13 @@
 
 (define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
+(define-abbrev-table 'inferior-ess-julia-mode-abbrev-table '())
+
 (define-abbrev-table 'inferior-ess-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-ess-r-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-ess-stata-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-julia-mode-abbrev-table '())
 
@@ -1211,9 +1228,17 @@
   '(
    ))
 
+(define-abbrev-table 'sr-buttons-mode-abbrev-table '())
+
+(define-abbrev-table 'sr-mode-abbrev-table '())
+
+(define-abbrev-table 'sr-virtual-mode-abbrev-table '())
+
 (define-abbrev-table 'tablist-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
+
+(define-abbrev-table 'term-mode-abbrev-table '())
 
 (define-abbrev-table 'tex-mode-abbrev-table '())
 
@@ -1244,3 +1269,4 @@
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'yaml-mode-abbrev-table '())
+

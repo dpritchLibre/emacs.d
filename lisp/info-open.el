@@ -40,6 +40,12 @@ semantics of FILE-OR-NODE."
   (dp-info "(Dired-x)"))
 
 
+(defun dp-info-emacs ()
+  "Open the Dired-x info."
+  (interactive)
+  (dp-info "(Emacs)"))
+
+
 (defun dp-info-sicp ()
   "Open the SICP info."
   (interactive)

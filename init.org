@@ -546,7 +546,7 @@ https://www.reddit.com/r/emacs/comments/8rxm7h/tip_how_to_better_manage_your_spe
     (abbrev-mode 1)
     :config
     (if (file-exists-p abbrev-file-name)
-	(quietly-read-abbrev-file)))
+        (quietly-read-abbrev-file)))
 
   (use-package flyspell
     :defer 1
@@ -560,7 +560,7 @@ https://www.reddit.com/r/emacs/comments/8rxm7h/tip_how_to_better_manage_your_spe
   (use-package flyspell-correct-ivy
     :after flyspell
     ;; :bind (:map flyspell-mode-map
-    ;; 	      ("C-;" . flyspell-correct-word-generic))
+    ;;        ("C-;" . flyspell-correct-word-generic))
     :custom (flyspell-correct-interface 'flyspell-correct-ivy))
 
   (defhydra hydra-spelling (:color blue)
@@ -1020,13 +1020,13 @@ https://github.com/browse-kill-ring/browse-kill-ring.
 ;; for a copying function for possible later addition
 (dolist (command '(yank yank-pop))
   (eval `(defadvice ,command (after indent-region activate)
-	   (and (not current-prefix-arg)
-		(member major-mode '(emacs-lisp-mode lisp-mode
-						     ess-mode        python-mode
-						     c-mode          c++-mode
-						     latex-mode      plain-tex-mode))
-		(let ((mark-even-if-inactive transient-mark-mode))
-		  (indent-region (region-beginning) (region-end) nil))))))
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     ess-mode        python-mode
+                                                     c-mode          c++-mode
+                                                     latex-mode      plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
 #+END_SRC
 
 Search for non-ASCII characters in the buffer.  Useful when copying text from
@@ -1491,19 +1491,19 @@ package index.
 (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 ;; AUCTeX hook additions
 (add-hook 'LaTeX-mode-hook
-	  (lambda ()
-	    ;; Enable document parsing (first two commands, see Section 1.3 in docs)
-	    (setq TeX-auto-save t)
-	    (setq TeX-parse-self t)
-	    ;; indent after newline
-	    (setq TeX-newline-function 'newline-and-indent)
-	    ;; Make AUCTex aware of multi-file document structure
-	    (setq-default TeX-master nil)
-	    ;; ;; unset local keybinding.  Note that this isn't the proper way to
-	    ;; ;; do this, see the comment in
-	    ;; ;; https://stackoverflow.com/a/7598754/5518304
-	    ;; (define-key (LaTeX-mode-map "C-;" nil))
-	    ))
+          (lambda ()
+            ;; Enable document parsing (first two commands, see Section 1.3 in docs)
+            (setq TeX-auto-save t)
+            (setq TeX-parse-self t)
+            ;; indent after newline
+            (setq TeX-newline-function 'newline-and-indent)
+            ;; Make AUCTex aware of multi-file document structure
+            (setq-default TeX-master nil)
+            ;; ;; unset local keybinding.  Note that this isn't the proper way to
+            ;; ;; do this, see the comment in
+            ;; ;; https://stackoverflow.com/a/7598754/5518304
+            ;; (define-key (LaTeX-mode-map "C-;" nil))
+            ))
 
 ;; ;; below doesn't work right, what can be done?
 ;; (setq LaTeX-fill-excluded-macros '("lstinline" "index"))
@@ -1633,8 +1633,8 @@ Use and configure =sqlup-mode=.
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 (add-hook 'yaml-mode-hook
-	  '(lambda ()
-	     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
 
 
